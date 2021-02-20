@@ -1,0 +1,62 @@
+<script type="text/javascript">
+    let type = getCookie("flashType")
+    if(type !== undefined){
+        let message = getCookie("flashMessage")
+        deleteCookie("flashType", "/", "{{.domain}}")
+        deleteCookie("flashMessage", "/", "{{.domain}}")
+        if(type=="success"){
+            $.toast({
+                text: "<div class='text-center'><i class='fas fa-check'></i> " + message + "</span>",
+                position: 'top-right',
+                loaderBg:'var(--color-clear);',
+                icon: 'success',
+                hideAfter: 3000
+            });
+        } else if(type=="info") {
+            $.toast({
+                text: "<div class='text-center'><i class='fas fa-info-circle'></i> " + message + "</span>",
+                position: 'top-right',
+                loaderBg:'var(--color-info)',
+                icon: 'info',
+                hideAfter: 3000
+            });
+        } else if(type=="warning") {
+            $.toast({
+                text: "<div class='text-center'><i class='fas fa-exclamation-triangle'></i> " + message + "</span>",
+                position: 'top-right',
+                loaderBg:'var(--color-warning)',
+                icon: 'warning',
+                hideAfter: 3000
+            });
+        } else if(type=="error"){
+            $.toast({
+                text: "<div class='text-center'><i class='fa fa-times-circle'></i> " + message + "</span>",
+                position: 'top-right',
+                icon: 'error',
+                hideAfter: false
+            });
+        }
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length).replaceAll("+", " ");
+            }
+        }
+        return undefined;
+    }
+    function deleteCookie( name, path, domain ) {
+        document.cookie = name + "=" +
+            ((path) ? ";path="+path:"")+
+            ((domain)?";domain="+domain:"") +
+            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    }
+</script>

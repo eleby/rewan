@@ -1,0 +1,172 @@
+{{ template "header.html" .}}
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "time.main.title" .lang nil}}</h5>
+            <p class="card-text card-text-centered">{{msg "time.main.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body">
+            <h5 class="card-title align-center">{{msg "time.tm.title" .lang nil}}</h5>
+            <p class="card-text card-text-centered mb-5">{{msg "time.tm.body" .lang nil}}</p>
+            <form class="card-text-centered">
+                <div class="row mb-5 justify-content-center">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{{msg "time.input.date" .lang nil}}</th>
+                                <th>{{msg "time.input.time" .lang nil}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="date" id="date" class="form-control" value="1995-09-20"></td>
+                                <td><input type="time" id="time" class="form-control" value="05:15"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body">
+            <h5 class="card-title align-center">{{msg "time.thisYear.title" .lang nil}}</h5>
+            <p class="card-text card-text-centered"><a id="thisYear" class="hyperlink" href="https://fr.wikipedia.org/wiki/1995" target="_blank">{{msg "time.thisYear.body" .lang nil}}</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row col-md-12 mt-4 px-0">
+        <div class="col-md-6 dpl-0 mpx-0">
+            <div class="card cardRounded">
+                <div class="card-body card-text-centered">
+                    <h5 class="card-title align-center">{{msg "time.years.title" .lang nil}}</h5>
+                    <span id="txtYears" class="timeNumber">0</span><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 dpr-0 mpx-0 mmt-4">
+            <div class="card cardRounded">
+                <div class="card-body card-text-centered">
+                    <h5 class="card-title align-center">{{msg "time.months.title" .lang nil}}</h5>
+                    <span id="txtMonths" class="timeNumber">0</span><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row col-md-12 mt-4 px-0">
+        <div class="col-md-6 dpl-0 mpx-0">
+            <div class="card cardRounded">
+                <div class="card-body card-text-centered">
+                    <h5 class="card-title align-center">{{msg "time.days.title" .lang nil}}</h5>
+                    <span id="txtDays" class="timeNumber">0</span><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 dpr-0 mpx-0 mmt-4">
+            <div class="card cardRounded">
+                <div class="card-body card-text-centered">
+                    <h5 class="card-title align-center">{{msg "time.hours.title" .lang nil}}</h5>
+                    <span id="txtHours" class="timeNumber">0</span><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4 mb-4">
+    <div class="row col-md-12 mt-4 px-0">
+        <div class="col-md-6 dpl-0 mpx-0">
+            <div class="card cardRounded">
+                <div class="card-body card-text-centered">
+                    <h5 class="card-title align-center">{{msg "time.minutes.title" .lang nil}}</h5>
+                    <span id="txtMinutes" class="timeNumber">0</span><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 dpr-0 mpx-0 mmt-4">
+            <div class="card cardRounded">
+                <div class="card-body card-text-centered">
+                    <h5 class="card-title align-center">{{msg "time.seconds.title" .lang nil}}</h5>
+                    <span id="txtSeconds" class="timeNumber">0</span><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#date").on("change", function(){
+        getTimes()
+    })
+    $("#time").on("change", function(){
+        getTimes()
+    })
+    $(document).ready(function(){
+        getTimes()
+    });
+
+    function getTimes(){
+        let date = $("#date").val()
+        let time = $("#time").val()
+
+        let year = date.split("-")[0]
+        let month = date.split("-")[1]
+        let day = date.split("-")[2]
+        let hour = time.split(":")[0]
+        let minute = time.split(":")[1]
+
+        $('#thisYear').attr("href", "https://fr.wikipedia.org/wiki/" + year);
+        $.ajax({
+            type: "GET",
+            url: "/tools/time/get/years/" + year + "/" + month + "/" + day + "/" + hour + "/" + minute
+        }).done(function (e) {
+            $('#txtYears').html(e);
+            $.ajax({
+                type: "GET",
+                url: "/tools/time/get/months/" + year + "/" + month + "/" + day + "/" + hour + "/" + minute
+            }).done(function (e) {
+                $('#txtMonths').html(e);
+                $.ajax({
+                    type: "GET",
+                    url: "/tools/time/get/days/" + year + "/" + month + "/" + day + "/" + hour + "/" + minute
+                }).done(function (e) {
+                    $('#txtDays').html(e);
+                    $.ajax({
+                        type: "GET",
+                        url: "/tools/time/get/hours/" + year + "/" + month + "/" + day + "/" + hour + "/" + minute
+                    }).done(function (e) {
+                        $('#txtHours').html(e);
+                        $.ajax({
+                            type: "GET",
+                            url: "/tools/time/get/minutes/" + year + "/" + month + "/" + day + "/" + hour + "/" + minute
+                        }).done(function (e) {
+                            $('#txtMinutes').html(e);
+                            $.ajax({
+                                type: "GET",
+                                url: "/tools/time/get/seconds/" + year + "/" + month + "/" + day + "/" + hour + "/" + minute
+                            }).done(function (e) {
+                                $('#txtSeconds').html(e);
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    }
+</script>
+
+{{ template "footer.html" .}}

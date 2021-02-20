@@ -1,0 +1,193 @@
+{{ template "header.html" .}}
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body darker-bg card-padding">
+            <h5 class="card-title align-center">{{msg "shelf.main.title" .lang nil}}</h5>
+            <div class="row col-md-12 px-0 darker-bg justify-content-center">
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.main.index.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-4">
+                                <a class="col text-center mb-4" href="/"><i class="fas fa-7x fa-door-open"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-1">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.main.profile.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-4">
+                                <a class="col text-center mb-4" href="/career"><i class="fa fa-7x fa-user-tie"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dmr-1">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.main.projects.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-4">
+                                <a class="col text-center mb-4" href="/projects"><i class="fa fa-7x fa-terminal"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dmr-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.main.contact.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-4">
+                                <a class="col text-center mb-4" href="/contact"><i class="fa fa-7x fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body darker-bg card-padding">
+            <h5 class="card-title align-center">{{msg "shelf.tools.time" .lang nil}}</h5>
+            <div class="row col-md-12 px-0 darker-bg justify-content-center">
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.tools.time.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-4">
+                                <a class="col text-center mb-4" href="/tools/time"><i class="fas fa-7x fa-clock"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.tools.memory.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-4">
+                                <a class="col text-center mb-4" href="/tools/memory"><i class="fas fa-7x fa-brain"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-6 mt-4">
+    <div class="card cardRounded">
+        <div class="card-body darker-bg card-padding">
+            <h5 class="card-title align-center">{{msg "shelf.secondary.title" .lang nil}}</h5>
+            <div class="row col-md-12 px-0 darker-bg justify-content-center">
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.bs.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/bootstrap">
+                                    <img height="100" src="/resources/img/bootstrap.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.play.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/play">
+                                    <img height="100" src="/resources/img/play.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.le.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/letsencrypt">
+                                    <img height="100" src="/resources/img/letsencrypt.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.gandi.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/gandi">
+                                    <img height="100" src="/resources/img/gandi.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.go.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/go">
+                                    <img height="100" class="img-radius" src="/resources/img/go.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.rouen.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/rouen">
+                                    <img height="100" class="img-radius" src="/resources/img/rouen.jpg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.gin.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/gin">
+                                    <img height="100" class="img-radius" src="/resources/img/gin.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-light dml-0">
+                        <div class="card-body-light">
+                            <h5 class="card-title">{{msg "shelf.secondary.v2.title" .lang nil}}</h5>
+                            <div class="row mt-3 mb-3">
+                                <a class="col text-center mb-3" href="/about/2.0">
+                                    <img height="100" class="img-radius" src="/resources/img/elb-icon.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.card-light').on("click", function(e){
+        e.preventDefault();
+        window.location = $(this).find( ".card-body-light a" ).attr('href');
+    });
+</script>
+{{ template "footer.html" .}}

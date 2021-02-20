@@ -1,0 +1,115 @@
+{{ template "header.html" .}}
+
+<div id="spinning-icons" class="d-md-none d-lg-inline-block">
+</div>
+
+<div id="welcome" class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "main.title" .lang nil}}</h5>
+            <p class="card-text">{{msg "main.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "me" .lang nil}}</h5>
+            <img class="index-profile" src="/resources/img/rewan.png"><br>
+            <p class="card-text">{{timeMachine "decYears" 1995 9 20 5 15 | msg "career.main.body" .lang}}</p>
+            <p class="card-text">{{msg "me.more" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4 mb-5">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "website.title" .lang nil}}</h5>
+            <p class="card-text">{{msg "website.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+{{ template "footer.html" .}}
+
+<script>
+    $("body").append("<div id='toRemove' class='spinning-icon'></div>")
+    widthIcon = parseFloat($("#toRemove").css("width"));
+    limitWidth = widthIcon*1.5;
+    count = 0;
+    container = $("#spinning-icons");
+    bodyWidth = parseFloat($("body").css("width"))
+    bodyHeight = parseFloat($("body").css("height"))
+    height = (bodyHeight-parseFloat($("footer").css("height")))-widthIcon
+    addIcon()
+
+    function addIcon(){
+        let rand = Math.random()*bodyWidth
+        let rand2 = Math.random()*24
+        let image
+        let id = "elem" + count
+        let icon = $("<div id=\"" + id + "\" class='spinning-icon'></div>")
+        count++;
+        if(rand2 <= 1){ image = "/resources/img/skills/bootstrap.svg"
+        } else if (rand2 <= 2) { image = "/resources/img/skills/gandi.svg"
+        } else if (rand2 <= 3) { image = "/resources/img/skills/gin.png"
+        } else if (rand2 <= 4) { image = "/resources/img/skills/go.svg"
+        } else if (rand2 <= 5) { image = "/resources/img/skills/gopher.svg"
+        } else if (rand2 <= 6) { image = "/resources/img/skills/letsencrypt.svg"
+        } else if (rand2 <= 7) { image = "/resources/img/skills/html.png"
+        } else if (rand2 <= 8) { image = "/resources/img/skills/css.png"
+        } else if (rand2 <= 9) { image = "/resources/img/skills/js.svg"
+        } else if (rand2 <= 10) { image = "/resources/img/skills/java.png"
+        } else if (rand2 <= 11) { image = "/resources/img/skills/spring.svg"
+        } else if (rand2 <= 12) { image = "/resources/img/skills/kotlin.png"
+        } else if (rand2 <= 13) { image = "/resources/img/skills/jetbrains.png"
+        } else if (rand2 <= 14) { image = "/resources/img/skills/sass.png"
+        } else if (rand2 <= 15) { image = "/resources/img/skills/laravel.png"
+        } else if (rand2 <= 16) { image = "/resources/img/skills/unity.png"
+        } else if (rand2 <= 17) { image = "/resources/img/skills/git.png"
+        } else if (rand2 <= 18) { image = "/resources/img/skills/github.svg"
+        } else if (rand2 <= 19) { image = "/resources/img/skills/gitlab.png"
+        } else if (rand2 <= 20) { image = "/resources/img/skills/mysql.png"
+        } else if (rand2 <= 21) { image = "/resources/img/skills/apache.png"
+        } else if (rand2 <= 22) { image = "/resources/img/skills/bash.png"
+        } else if (rand2 <= 23) { image = "/resources/img/skills/jquery.png"
+        } else if (rand2 <= 24) { image = "/resources/img/skills/php.png"
+        } else { image = "/resources/img/skills/play.svg"}
+
+        if(rand > bodyWidth - limitWidth){
+            rand -= limitWidth
+        } else if(rand < limitWidth) {
+            rand += limitWidth
+        }
+
+        if(Math.random()*10 <= 5){
+            icon.css("left", rand + "px");
+        } else {
+            icon.css("right", rand + "px");
+        }
+
+        icon.css("background-image", "URL(" + image + ")")
+        container.append(icon[0].outerHTML)
+        let elem = $("#" + id)
+        AnimateRotate(elem, Math.random()*720-360)
+        elem.animate({top: height + "px"}, 6000, function(){
+            elem.animate({opacity: 0}, 500, function(){
+                elem.remove()
+            });
+        });
+        setTimeout(function(){ addIcon(); }, 200);
+    }
+    function AnimateRotate(elem, angle) {
+        let $elem = elem;
+
+        $({deg: 0}).animate({deg: angle}, {
+            duration: 6000,
+            step: function(now) {
+                $elem.css({
+                    transform: 'rotate(' + now + 'deg)'
+                });
+            }
+        });
+    }
+</script>

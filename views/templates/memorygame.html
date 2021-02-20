@@ -1,0 +1,185 @@
+{{ template "header.html" .}}
+<div class="gameState text-center">
+
+</div>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="chessGame justify-content-center" style="width: 55%;">
+
+            {{range $indexRow, $boardRow := .board.Board}}
+                <div class="row chessRow">
+                    {{range $indexPiece, $boardPiece := $boardRow.Pieces}}
+                        <div idRow="{{$indexRow}}" idPiece="{{$indexPiece}}"
+                             class="col text-center chess {{pieceColor $boardPiece $.board.Cols}}
+                             d-flex justify-content-center align-items-center
+                             {{cornerClass $boardPiece $.board.Cols $.board.Rows}}">
+                            {{if eq $boardPiece.PieceType $.pieceType.QUEEN}}
+                                <i class="fas fa-2x fa-chess-queen"></i>
+                            {{end}}
+                            {{if eq $boardPiece.PieceType $.pieceType.ROOK}}
+                                <i class="fas fa-2x fa-chess-rook"></i>
+                            {{end}}
+                            {{if eq $boardPiece.PieceType $.pieceType.BISHOP}}
+                                <i class="fas fa-2x fa-chess-bishop"></i>
+                            {{end}}
+                            {{if eq $boardPiece.PieceType $.pieceType.KNIGHT}}
+                                <i class="fas fa-2x fa-chess-knight"></i>
+                            {{end}}
+                            {{if eq $boardPiece.PieceType $.pieceType.PAWN}}
+                                <i class="fas fa-2x fa-chess-pawn"></i>
+                            {{end}}
+                        </div>
+                    {{end}}
+                </div>
+            {{end}}
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".chess").css("font-size", "{{.board.FontSize}}rem")
+
+    $( document ).ready(function() {
+
+        $(".chessRow").css("height", $(".chess").css("width"));
+        $(".chess").css("transform", "scaleX(1) scale(1) rotate(0)")
+
+        setTimeout(function(){ hideCards(); }, {{.board.Time}})
+
+        $(document).on("keyup", function (e){
+            if(e.keyCode == 32){
+                window.location.href="/tools/memory/game"
+            }
+            else if(e.keyCode == 27){
+                window.location.href="/tools/memory/game/reset"
+            }
+        })
+
+        function hideCards(){
+            changeTransition();
+            $(".chess").css("transform", "scaleX(0) scale(1) rotate(-50deg)")
+            setTimeout(function(){ removeCards(); }, 300);
+            setTimeout(function(){ showCards(); }, 300);
+        }
+
+        function showCards(){
+            $(".chess").css("transform", "scaleX(1) scale(1) rotate(0)")
+            setTimeout(function(){ changeTransition(); }, 300);
+
+            bindEventMouseOver($(".chess"))
+            bindEventMouseOut($(".chess"))
+
+            $(".chess").on("click", function (){
+                let idRow = $(this).attr("idRow")
+                let idPiece = $(this).attr("idPiece")
+                let div = $(this);
+                $.getJSON("/tools/memory/game/row/"+idRow+"/piece/" + idPiece + "/type", function(data) {
+                    if(data !== "{{.gameState.SUCCESS}}" && data !== "{{.gameState.FAILED}}"){
+                        div.css("transform", "scaleX(0) scale(1) rotate(-50deg)")
+                        div.unbind("click")
+                        div.unbind("mouseover")
+                        div.unbind("mouseout")
+                        div.removeClass("chess-white")
+                        div.removeClass("chess-black")
+                        if(data === "{{.pieceType.QUEEN}}"){
+                            div.addClass("chess-success")
+                        }
+                        else{
+                            div.addClass("chess-fail")
+                        }
+                        setTimeout(function (){div.css("transform", "scaleX(1) scale(1) rotate(0)")}, 300);
+                        setTimeout(function (){div.html("<i class=\"fas fa-2x fa-chess-" + data.toLowerCase() + "\"></i>")}, 300);
+                        setTimeout(function (){bindEventMouseOver(div)}, 300)
+                        setTimeout(function (){bindEventMouseOut(div)}, 300)
+                    }
+                    else {
+                        div.css("transform", "scaleX(0) scale(1) rotate(-50deg)")
+                        if(data === "{{.gameState.SUCCESS}}"){
+                            setTimeout(function (){div.html("<i class=\"fas fa-2x fa-chess-{{.pieceType.QUEEN.StringLower}}\"></i>")}, 300);
+                        }
+                        setTimeout(function (){div.css("transform", "scaleX(1) scale(1) rotate(0)")}, 300);
+                        $(".chess").unbind("click")
+                        $(".chess").unbind("mouseover")
+                        $(".chess").unbind("mouseout")
+                        div.removeClass("chess-white")
+                        div.removeClass("chess-black")
+                        if(data === "{{.gameState.SUCCESS}}"){
+                            div.addClass("chess-success")
+                        }
+                        else {
+                            div.addClass("chess-fail")
+                        }
+                        $(".chess").each(function (){
+                            reveal($(this))
+                        })
+                        reveal(div)
+                        setTimeout(gameEnd(data), 300)
+                    }
+                })
+            })
+        }
+
+        function gameEnd(data){
+            let overlay = $(".gameState")
+            overlay.css("height", "5rem")
+            if(data === "{{.gameState.SUCCESS}}"){
+                overlay.css("color", "#35D477")
+                overlay.text('{{msg "memory.game.end.success" .lang nil}}')
+            }
+            else {
+                overlay.css("color", "#922329")
+                overlay.text('{{msg "memory.game.end.failed" .lang nil}}')
+            }
+            $(document).on("keyup", function (e){
+                if(e.keyCode == 13){
+                    window.location.href="/tools/memory/game/finish"
+                }
+            })
+        }
+
+        function reveal(obj){
+            let idRow = obj.attr("idRow")
+            let idPiece = obj.attr("idPiece")
+            obj.css("transform", "scaleX(0) scale(1) rotate(-50deg)")
+            $.getJSON("/tools/memory/game/row/"+idRow+"/piece/" + idPiece + "/type", function(data) {
+                setTimeout(function (){obj.css("transform", "scaleX(1) scale(1) rotate(0)")}, 300);
+                if(!(obj.hasClass("chess-success") || obj.hasClass("chess-fail"))) {
+                    setTimeout(function () {
+                        obj.html("<i class=\"fas fa-2x fa-chess-" + data.toLowerCase() + "\"></i>")
+                    }, 300);
+                }
+            })
+        }
+
+        function bindEventMouseOver(obj){
+            obj.on("mouseover", function (){
+                $(this).css("transform", "scaleX(1) scale(1.15) rotate(0)")
+                $(this).css("z-index", "100")
+                $(this).find("i").css("transform", "scale(1.15)")
+            })
+        }
+
+        function bindEventMouseOut(obj){
+            obj.on("mouseout", function (){
+                $(this).css("transform", "scale(1) rotate(0)")
+                $(this).css("z-index", "1")
+                $(this).find("i").css("transform", "scaleX(1) scale(1) rotate(0)")
+                $(this).css("border-radius", "0")
+            })
+        }
+
+        function changeTransition(){
+            if($(".chess").css("transition-duration") === "30s"){
+                $(".chess").css("transition-duration", ".75s")
+            }
+            else {
+                $(".chess").css("transition-duration", ".30s")
+            }
+        }
+
+        function removeCards(){
+            $(".chess").find("i").remove()
+        }
+    });
+</script>
+{{ template "footer.html" .}}

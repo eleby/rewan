@@ -1,0 +1,284 @@
+{{ template "header.html" .}}
+<div class="row col-md-12">
+    <div class="mt-4 col-md-6">
+        <div class="card cardRounded">
+            <div class="card-body card-padding">
+                <h5 class="card-title align-center">{{msg "career.main.title" .lang nil}}</h5><br>
+                <img class="cv-profile" src="/resources/img/rewan.png"><br>
+                <p class="card-text">{{timeMachine "decYears" 1995 9 20 5 15 | msg "career.main.body" .lang}}</p>
+            </div>
+        </div>
+        <div class="card cardRounded mt-4 pb-3">
+            <div class="card-body card-padding-desktop">
+                <h5 class="card-title align-center">{{msg "career.lang.title" .lang nil}}</h5><br>
+                <p class="card-text legend border-bot">{{msg "career.lang.body" .lang nil}}</p>
+                <div class="row align-center" style="text-align:center">
+                    <div class="legends">
+                        <p class="card-text">{{msg "career.lang.body.1" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.2" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.3" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.4" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.5" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.6" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.7" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.8" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.lang.body.9" .lang nil}}</p>
+                    </div>
+                    <div class="stars ml-3">
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i><i class="far fa-circle"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 col-md-6">
+        <div class="card cardRounded">
+            <div class="card-body card-padding-desktop">
+                <h5 class="card-title align-center">{{msg "career.skills.title" .lang nil}}</h5>
+                <div>
+                    <p class="card-text legend">{{msg "career.skills.legend.os" .lang nil}}</p>
+                    <p class="card-text subcategory-cv">
+                    <div class="col-12">
+                        <div class="row justify-content-center text-center">
+                            <i class="col-3 fab fa-linux fa-3x mt-1 mb-1"></i>
+                            <i class="col-3 fab fa-apple fa-3x mt-1 mb-1"></i>
+                            <i class="col-3 fab fa-windows fa-3x mt-1 mb-1"></i>
+                        </div>
+                    </div>
+                    </p>
+                </div>
+                <div class="mt-1">
+                    <p class="card-text legend">{{msg "career.skills.legend.formats" .lang nil}}</p>
+                    <p class="card-text subcategory-cv">
+                        <div class="col-12">
+                            <div class="row justify-content-center text-center">
+                                <i class="col-4 fas fa-mobile-alt fa-3x mt-1 mb-1"></i>
+                                <i class="col-4 fas fa-tablet-alt fa-3x mt-1 mb-1"></i>
+                                <i class="col-4 fas fa-laptop fa-3x mt-1 mb-1"></i>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+                <p class="card-text legend">{{msg "career.skills.legend.present" .lang nil}}</p>
+                <div class="row category-cv mt-1">
+                    <span class="col icon-cv fa fa-terminal col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center desktopOnly" style=" display:inline-block;vertical-align: middle;"></span>
+                    <span class="col-2 icon-cv fa fa-terminal col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center mobileOnly" style=" display:inline-block;vertical-align: middle;"></span>
+                    &nbsp
+                    <a class="col card-text">
+                        {{msg "career.skills.body.ide" .lang nil}}
+                    </a>
+                </div>
+                <div class="row category-cv mt-1">
+                    <i class="col icon-cv fa fa-database col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center desktopOnly"></i>
+                    <i class="col-2 icon-cv fa fa-database col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center mobileOnly"></i>
+                    &nbsp
+                    <a class="col card-text">
+                        {{msg "career.skills.body.db" .lang nil}}
+                    </a>
+                </div>
+                <div class="row category-cv mt-1">
+                    <i class="col icon-cv fa fa-code-branch col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center desktopOnly"></i>
+                    <i class="col-2 icon-cv fa fa-code-branch col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center mobileOnly"></i>
+                    &nbsp
+                    <a class="col card-text">
+                        {{msg "career.skills.body.git" .lang nil}}
+                    </a>
+                </div>
+                <div class="row category-cv mt-1">
+                    <i class="col icon-cv fa fa-tasks col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center desktopOnly"></i>
+                    <i class="col-2 icon-cv fa fa-tasks col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center mobileOnly"></i>
+                    &nbsp
+                    <a class="col card-text">
+                        {{msg "career.skills.body.pm" .lang nil}}
+                    </a>
+                </div>
+                <div class="row category-cv mt-1">
+                    <i class="col icon-cv fa fa-palette col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center desktopOnly"></i>
+                    <i class="col-2 icon-cv fa fa-palette col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center mobileOnly"></i>
+                    &nbsp
+                    <a class="col card-text">
+                        {{msg "career.skills.body.design" .lang nil}}
+                    </a>
+                </div>
+                <div class="row category-cv mt-1">
+                    <i class="col icon-cv fa fa-desktop col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center desktopOnly"></i>
+                    <i class="col-2 icon-cv fa fa-desktop col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center mobileOnly"></i>
+                    &nbsp
+                    <a class="col card-text">
+                        {{msg "career.skills.body.desk" .lang nil}}
+                    </a>
+                </div>
+                <div class="row category-cv mt-1">
+                    <i class="col icon-cv fa fa-globe col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center desktopOnly"></i>
+                    <i class="col-2 icon-cv fa fa-globe col-sm-1 mt-1 mb-1 d-flex align-items-center justify-content-center mobileOnly"></i>
+                    &nbsp
+                    <a class="col card-text" style="display:inline !important">
+                        {{msg "career.skills.body.lang" .lang nil}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card cardRounded mt-4">
+            <div class="card-body card-padding-desktop">
+                <h5 class="card-title align-center">{{msg "career.quali.title" .lang nil}}</h5><br>
+                <p class="card-text legend border-bot">{{msg "career.quali.body" .lang nil}}</p>
+                <div class="row align-center" style="text-align:center">
+                    <div class="legends">
+                        <p class="card-text">{{msg "career.quali.body.1" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.quali.body.2" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.quali.body.3" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.quali.body.4" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.quali.body.5" .lang nil}}</p>
+                        <p class="card-text">{{msg "career.quali.body.6" .lang nil}}</p>
+                    </div>
+                    <div class="stars ml-3">
+                        <p class="card-text ml-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></p>
+                        <p class="card-text ml-3"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="far fa-star"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="mt-4 mb-4 col-md-12">
+        <div class="card cardRounded">
+            <div class="card-body card-padding-desktop">
+                <h5 class="card-title align-center">{{msg "career.exp.title" .lang nil}}</h5>
+
+                <div class="exp">
+                    <div class="cv-title">
+                        <div class="float-left">
+                            <b>{{msg "career.exp.eyeneed.title" .lang nil}}</b>
+                        </div>
+                        <br class="mobileOnly">
+                        <div class="float-right">{{msg "career.exp.eyeneed.context" .lang nil}}</div>
+                    </div>
+                </div>
+                <br>
+                <div class="cv-exp">
+                    <div class="col-md-8 exp-txt">
+                        {{msg "career.exp.eyeneed.body" .lang nil}}
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="cv-title mt-3">
+                        <div class="float-left">
+                            <b>{{msg "career.exp.altitude.title" .lang nil}}</b>
+                        </div>
+                        <br class="mobileOnly">
+                        <div class="float-right">
+                            {{msg "career.exp.altitude.context" .lang nil}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="cv-exp">
+                    <div class="col-md-8 exp-txt">
+                        {{msg "career.exp.altitude.body" .lang nil}}
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="cv-title mt-3">
+                        <div class="float-left">
+                            <b>{{msg "career.exp.keyveo.title" .lang nil}}</b>
+                        </div>
+                        <br class="mobileOnly">
+                        <div class="float-right">
+                            {{msg "career.exp.keyveo.context" .lang nil}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="cv-exp">
+                    <div class="col-md-8 exp-txt">
+                        {{msg "career.exp.keyveo.body" .lang nil}}
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="cv-title mt-3">
+                        <div class="float-left">
+                            <b>{{msg "career.exp.viaflats.title" .lang nil}}</b>
+                        </div>
+                        <br class="mobileOnly">
+                        <div class="float-right">
+                            {{msg "career.exp.viaflats.context" .lang nil}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="cv-exp">
+                    <div class="col-md-8 exp-txt">
+                        {{msg "career.exp.viaflats.body" .lang nil}}
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="cv-title mt-3">
+                        <div class="float-left">
+                            <b>{{msg "career.exp.neoma.title" .lang nil}}</b>
+                        </div>
+                        <br class="mobileOnly">
+                        <div class="float-right">
+                            {{msg "career.exp.neoma.context" .lang nil}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="cv-exp">
+                    <div class="col-md-8 exp-txt">
+                        {{msg "career.exp.neoma.body" .lang nil}}
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="cv-title mt-3">
+                        <div class="float-left">
+                            <b>{{msg "career.exp.doqboard.title" .lang nil}}</b>
+                        </div>
+                        <br class="mobileOnly">
+                        <div class="float-right">
+                            {{msg "career.exp.doqboard.context" .lang nil}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="cv-exp">
+                    <div class="col-md-8 exp-txt">
+                        {{msg "career.exp.doqboard.body" .lang nil}}
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="cv-title mt-3">
+                        <div class="float-left">
+                            <b>{{msg "career.exp.arkena.title" .lang nil}}</b>
+                        </div>
+                        <br class="mobileOnly">
+                        <div class="float-right">
+                            {{msg "career.exp.arkena.context" .lang nil}}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="cv-exp">
+                    <div class="col-md-8 exp-txt">
+                        {{msg "career.exp.arkena.body" .lang nil}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ template "footer.html" .}}

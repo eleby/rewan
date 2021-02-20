@@ -1,0 +1,42 @@
+{{ template "header.html" .}}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body">
+            <h5 class="card-title align-center">{{msg "contact.main.title" .lang nil}}</h5>
+            <p class="card-text-centered"><i class="fa fa-envelope"></i>&nbsp{{msg "contact.main.body.mail" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+<div class="container mt-4 mb-4">
+    <div class="card cardRounded">
+        <div class="card-body">
+            <form id="formContact" method="POST" action="/contact/mail">
+                <h5 class="card-title align-center">{{msg "contact.quick.title" .lang nil}}</h5>
+                <p class="card-text-centered">&nbsp{{msg "contact.quick.body.mail" .lang nil}}</p>
+                <div class="row justify-content-center">
+                    <input id="mail" name="mail" class="msg form-control col-md-6" type="text">
+                </div>
+                <p class="card-text-centered">&nbsp{{msg "contact.quick.body.content" .lang nil}}</p>
+                <div class="row justify-content-center">
+                    <textarea id="content" name="content" class="msg form-control col-md-6" style="margin:0" rows="10"></textarea>
+                </div>
+                <div class="row justify-content-center g-recaptcha mt-4"  data-callback="captchaCallback" data-sitekey="6Lcnp9kUAAAAAPorJ72VMPFOG_k4DEcabNaziYWy" data-theme="dark"></div>
+                <input type="hidden" name="recaptcha" id="recaptcha" />
+
+                <div class="row justify-content-center">
+                    <a class="btnSendMail btn btn-success mt-4"><i class="fa fa-paper-plane"></i>&nbsp{{msg "contact.quick.body.send" .lang nil}}</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function captchaCallback() {
+        document.getElementById("recaptcha").value = document.getElementById("g-recaptcha-response").value;
+    }
+    $('.btnSendMail').on('click', function () {
+        $('#formContact').submit();
+    });
+</script>
+{{ template "footer.html" .}}

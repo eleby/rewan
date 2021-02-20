@@ -1,0 +1,50 @@
+{{ template "header.html" .}}
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "projects.main.title" .lang nil}}</h5>
+            <p class="card-text">{{msg "projects.main.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "projects.scridle.title" .lang nil}}</h5>
+            <img class="projects-img" src="/resources/img/scridle.png"><br>
+            <p class="card-text">{{msg "projects.scridle.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "projects.ost.title" .lang nil}}</h5>
+            <img class="projects-img" src="/resources/img/ostily.png"><br>
+            <p class="card-text">{{msg "projects.ost.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "projects.ohp.title" .lang nil}}</h5>
+            <img class="projects-img" src="/resources/img/ohpirate.png"><br>
+            <p class="card-text">{{msg "projects.ohp.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-6 mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h5 class="card-title align-center">{{msg "projects.rew.title" .lang nil}}</h5>
+            <img class="projects-img" src="/resources/img/elb.svg"><br>
+            <p class="card-text">{{msg "projects.rew.body" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+{{ template "footer.html" .}}

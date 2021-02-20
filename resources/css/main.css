@@ -1,0 +1,287 @@
+@media only screen and (min-width: 760px) {
+    html{font-size: 15px;}
+    .spinning-icon {
+        width: 4rem;
+        height: 4rem;
+    }
+    .mobileOnly { display: none !important; }
+    .dpl-0 { padding-left:0; }
+    .dpr-0 { padding-right:0; }
+    .dpx-0 { padding-left: 0; padding-right: 0; }
+    .dml-1 { margin-left: .25em; }
+    .dmr-1 { margin-right: .25em; }
+    .cv-title { font-size: 1.25rem; }
+
+    .timeNumber {
+        font-size: 3rem;
+    }
+
+    .card-padding-desktop {
+        padding: 2rem 3rem 2rem 3rem;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    html{font-size: 12px;}
+    .spinning-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+    .desktopOnly { display: none !important; }
+    .mpl-0 { padding-left:0; }
+    .mpr-0 { padding-right:0; }
+    .mpx-0 { padding-left: 0; padding-right: 0; }
+    .mmt-4 { margin-top: 1.5rem; }
+    .cv-title .float-left { font-size: 1.1rem; width:100%; border-bottom: 1px solid; }
+    .legends .card-text, .stars .card-text { font-size: .9rem }
+
+    .timeNumber {
+        font-size: 2rem;
+    }
+}
+
+.text-themed, h5 {
+    font-family: 'Fredoka One' !important;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    background-color: var(--color-darker);
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    min-height:30px;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-family: georgia;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.cardRounded, .cardRounded .card-body {
+    border-radius: 15px !important;
+}
+
+.card-body-light:hover, .card-light:hover{
+    cursor:pointer;
+}
+
+.card-body-light, .card-light {
+    border-radius:15px !important;
+}
+
+.card-title {
+    margin-bottom: 2rem;
+    text-decoration: underline;
+    text-align:center;
+    font-size: 1.25rem;
+    font-family: georgia;
+}
+
+.row {
+    margin:0;
+}
+
+.cv-profile {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+}
+
+.index-profile {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+}
+
+.projects-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50px;
+}
+
+.card-text {
+    text-align: justify;
+    font-style: italic;
+    font-family: 'roboto';
+    font-size: 1rem;
+}
+
+.card-text-centered {
+    text-align: center;
+    font-family: 'roboto';
+    font-size: 1rem;
+}
+
+.category-cv {
+    border-radius:5px;
+}
+
+.subcategory-cv {
+    width:100%;
+    text-align:center;
+}
+
+.icon-cv {
+    text-align:center;
+    border-right:1px solid;
+    vertical-align: middle !important;
+    align-items:center;
+}
+
+.icon-cv-alt {
+    text-align:center;
+    border-bottom:1px solid;
+    vertical-align: middle !important;
+    align-items:center;
+}
+
+.legend {
+    width:100%;
+    text-align:center;
+}
+
+.stars {
+    border-left: solid 1px;
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.legends {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.border-bot {
+    border-bottom : solid 1px;
+}
+
+.border-r {
+    border-right: 1px solid;
+}
+
+.cv-title {
+    text-align: justify;
+    font-style: italic;
+    font-family: 'roboto';
+}
+
+.exp-context {
+    padding-right:0px;
+}
+
+.cv-exp {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    border-radius : 5px;
+    padding-top:2em;
+    padding-bottom:2em;
+    padding-right:2em;
+    padding-left:2em;
+}
+
+.exp-txt {
+    max-width:100%;
+    width:100%;
+    text-align: justify;
+    font-style: italic;
+    font-family: 'roboto';
+    font-size: 1rem;
+}
+
+.mb-6 {
+    margin-bottom: 4rem !important;
+}
+
+.timeNumber {
+    text-align: center;
+    font-family: Bungee Shade;
+}
+
+.img-radius {
+    border-radius: 15px;
+}
+
+.chess {
+    transform: scaleX(1) scale(0) rotate(-30deg);
+    z-index: 1;
+    transition: all .75s ease-in-out;
+}
+
+.chess i {
+    transition: all .75s ease-in-out;
+}
+
+.chess-black {
+    color: var(--color-clear) !important;
+    background-color: #5E331B !important;
+}
+
+.chess-white {
+    color: #620500 !important;
+    background-color: var(--color-clear) !important;
+}
+
+.chess-success {
+    color: white !important;
+    background-color: #35D477 !important;
+}
+
+.chess-fail {
+    color: black !important;
+    background-color: #922329 !important;
+}
+
+.chessTopLeft {
+    border-top-left-radius: 20px !important;
+}
+
+.chessTopRight {
+    border-top-right-radius: 20px !important;
+}
+
+.chessBotLeft {
+    border-bottom-left-radius: 20px !important;
+}
+
+.chessBotRight {
+    border-bottom-right-radius: 20px !important;
+}
+
+.gameState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 0;
+    max-height: 5rem;
+    background-color: black;
+    z-index: 100;
+    transition: height 1s;
+}
+
+.spinning-icon {
+    z-index: 0;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 0;
+}
+
+.img-wiki {
+    height: 16rem !important;
+}
+
+.card-padding {
+    padding: 2rem 3rem 2rem 3rem;
+}

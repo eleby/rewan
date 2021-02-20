@@ -1,0 +1,24 @@
+</body>
+<footer class="darker-bg">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-3 col-md text-center text-md-left d-inline-block">v{{.version}}</div>
+            <div class="col-6 col-md text-center d-inline-block">© {{ year }} Erwan Le Bihan</div>
+            <div class="col-3 col-md text-center text-md-right d-inline-block">
+                <a class="hyperlink-reverse" href="mailto:elb@rewan.dev">
+                    <i class="fas fa-fw fa-envelope"></i>
+                </a>
+                <a class="hyperlink-reverse" target="_blank" href="https://www.linkedin.com/in/erwan-le-bihan-76301513a/?originalSubdomain=fr">
+                    <i class="fab fa-fw fa-linkedin-in"></i>
+                </a>
+                <a class="hyperlink-reverse" target="_blank" href="https://github.com/eleby">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+{{if eq .hasAcceptedCookies false}}
+<script src="/resources/js/cookieAlert/cookie.js"></script>
+{{end}}
+</html>
