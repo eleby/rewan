@@ -184,5 +184,7 @@
   "title.memory": "Jeu de mémoire",
   "title.version": "Version 2.0 - Refonte du site",
   "title.404": "Page introuvable",
-  "title.500": "Erreur serveur"
+  "title.500": "Erreur serveur",
+
+  "meta.desc": "Site web personnel de Erwan Le Bihan, ingénieur développeur basé à Rouen."
 }

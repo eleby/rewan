@@ -181,5 +181,7 @@
   "title.memory": "Memory game",
   "title.version": "Version 2.0 - Website rework",
   "title.404": "Page not found",
-  "title.500": "Server error"
+  "title.500": "Server error",
+
+  "meta.desc": "Personal website of Erwan Le Bihan, engeneer and developer located in Rouen, France."
 }
