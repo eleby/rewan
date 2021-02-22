@@ -3,7 +3,7 @@
 <div class="container mt-4">
     <div class="card cardRounded">
         <div class="card-body">
-            <h5 class="card-title align-center">{{msg "contact.main.title" .lang nil}}</h5>
+            <h1 class="card-title align-center">{{msg "contact.main.title" .lang nil}}</h1>
             <p class="card-text-centered"><i class="fa fa-envelope"></i>&nbsp{{msg "contact.main.body.mail" .lang nil}}</p>
         </div>
     </div>
@@ -12,7 +12,7 @@
     <div class="card cardRounded">
         <div class="card-body">
             <form id="formContact" method="POST" action="/contact/mail">
-                <h5 class="card-title align-center">{{msg "contact.quick.title" .lang nil}}</h5>
+                <h1 class="card-title align-center">{{msg "contact.quick.title" .lang nil}}</h1>
                 <p class="card-text-centered">&nbsp{{msg "contact.quick.body.mail" .lang nil}}</p>
                 <div class="row justify-content-center">
                     <input id="mail" name="mail" class="msg form-control col-md-6" type="text">

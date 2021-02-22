@@ -9,7 +9,7 @@
 <div class="container mt-4">
     <div class="card cardRounded">
         <div class="card-body text-center card-padding">
-            <h5 class="card-title align-center">{{.titleContent}}</h5>
+            <h1 class="card-title align-center">{{.titleContent}}</h1>
             <p class="card-text">{{.textContent}}</p>
         </div>
     </div>
@@ -18,7 +18,7 @@
 <div class="container mt-4 mb-4">
     <div class="card cardRounded">
         <div class="card-body text-center">
-            <h5 class="card-title align-center">{{msg "secondary.info.title" .lang nil}}</h5>
+            <h1 class="card-title align-center">{{msg "secondary.info.title" .lang nil}}</h1>
             <div class="row justify-content-center mt-5">
                 {{if .website}}<div class="card-text-centered col col-md-3"><i class="fas fa-3x fa-globe-europe"></i><p class="mt-4">{{msg "secondary.info.website" .lang .website}}</p></div>{{end}}
                 {{if .wiki}}<div class="card-text-centered col col-md-3"><i class="fab fa-3x fa-wikipedia-w"></i><p class="mt-4">{{msg "secondary.info.wiki" .lang .wiki}}</p></div>{{end}}

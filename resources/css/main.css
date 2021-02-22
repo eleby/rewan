@@ -11,6 +11,7 @@
     .dml-1 { margin-left: .25em; }
     .dmr-1 { margin-right: .25em; }
     .cv-title { font-size: 1.25rem; }
+    .cv-title h2 { font-size: 1.25rem; }
 
     .timeNumber {
         font-size: 3rem;
@@ -32,7 +33,8 @@
     .mpr-0 { padding-right:0; }
     .mpx-0 { padding-left: 0; padding-right: 0; }
     .mmt-4 { margin-top: 1.5rem; }
-    .cv-title .float-left { font-size: 1.1rem; width:100%; border-bottom: 1px solid; }
+    .cv-title .float-left { width:100%; border-bottom: 1px solid; }
+    .cv-title h2 { font-size: 1.1rem; }
     .legends .card-text, .stars .card-text { font-size: .9rem }
 
     .timeNumber {
@@ -40,7 +42,7 @@
     }
 }
 
-.text-themed, h5 {
+.text-themed, h1, h2 {
     font-family: 'Fredoka One' !important;
 }
 
@@ -184,10 +186,7 @@ footer {
     border-right: 1px solid;
     border-left: 1px solid;
     border-radius : 5px;
-    padding-top:2em;
-    padding-bottom:2em;
-    padding-right:2em;
-    padding-left:2em;
+    padding: 2em;
 }
 
 .exp-txt {
