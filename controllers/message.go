@@ -25,10 +25,14 @@ func InitBundle() {
 func GetLang(c *gin.Context) string {
 	log.Print("message.go > GetLang")
 	lang, err := c.Get("lang")
-	if err != false {
-		return lang.(string)[:2]
+	if err != false && lang != nil {
+		langStr := lang.(string)
+		if len(langStr) > 2 && langStr[:2] != "en" && langStr[:2] != "fr" {
+			langStr = "en"
+		}
+		return langStr[:2]
 	} else {
-		return ""
+		return "en"
 	}
 }
 
