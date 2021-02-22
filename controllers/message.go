@@ -27,7 +27,7 @@ func GetLang(c *gin.Context) string {
 	lang, err := c.Get("lang")
 	if err != false && lang != nil {
 		langStr := lang.(string)
-		if len(langStr) > 2 && langStr[:2] != "en" && langStr[:2] != "fr" {
+		if len(langStr) < 2 || (langStr[:2] != "en" && langStr[:2] != "fr") {
 			langStr = "en"
 		}
 		return langStr[:2]
