@@ -183,9 +183,7 @@ func main() {
 		c.HTML(http.StatusOK, "version.html", controllers.Render(c, gin.H{"title": "version"}))
 	})
 	r.GET("/sitemap.xml", controllers.RenderSitemap())
-	r.GET("/robots.txt", func(c *gin.Context) {
-		c.File("robots.txt")
-	})
+	r.GET("/robots.txt", renderRobotsTxtFile)
 	//Display a page for routes not found (error 404)
 	r.NoRoute(func(c *gin.Context) {
 		lang := controllers.GetLang(c)
@@ -200,4 +198,8 @@ func main() {
 	routines.ManageLogsRoutine()
 	//Launch the server at the configured TCP port
 	_ = r.Run(":" + strconv.Itoa(models.Conf.Port))
+}
+
+func renderRobotsTxtFile(c *gin.Context) {
+	c.File("robots.txt")
 }
