@@ -183,6 +183,9 @@ func main() {
 		c.HTML(http.StatusOK, "version.html", controllers.Render(c, gin.H{"title": "version"}))
 	})
 	r.GET("/sitemap.xml", controllers.RenderSitemap())
+	r.GET("/robots.txt", func(c *gin.Context) {
+		c.File("robots.txt")
+	})
 	//Display a page for routes not found (error 404)
 	r.NoRoute(func(c *gin.Context) {
 		lang := controllers.GetLang(c)
