@@ -42,6 +42,32 @@
     }
 }
 
+@font-face {
+    font-family: 'Fredoka One';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/resources/fonts/FredokaOne.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/resources/fonts/Roboto.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Bungee Shade';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/resources/fonts/BungeeShade.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 .text-themed, h1, h2 {
     font-family: 'Fredoka One' !important;
 }
@@ -61,6 +87,66 @@ footer {
     font-family: georgia;
     font-size: 1rem;
     width: 100%;
+}
+
+.navbar {
+    z-index: 10;
+}
+
+.navbar-brand {
+    font-family: georgia;
+}
+
+.nav-img {
+    height:2.6rem;
+}
+
+.navbar-toggler {
+    padding: 0.25rem 0.55rem;
+    font-size: 1rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.navbar-toggler:hover, .navbar-toggler:focus {
+    text-decoration: none;
+}
+
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    content: "";
+    background: no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.alignNavItem {
+    text-align:center;
+}
+
+.navButton, .navbarDesktop {
+    text-align:right;
+}
+
+.navButton i {
+    font-size:2.3rem;
+}
+
+.nav-big-item i {
+    font-size:1.6rem;
+}
+
+.nav-big-item span, .nav-item span {
+    display:none;
+}
+
+.nav-item {
+    text-align:center;
+    margin-top:7px;
 }
 
 .cardRounded, .cardRounded .card-body {
