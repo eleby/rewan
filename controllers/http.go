@@ -10,6 +10,8 @@ import (
 //Function used to pass global variables easier, and to simplify the code
 func Render(c *gin.Context, args gin.H) gin.H {
 	log.Print("http.go > Render")
+	//The lang is used to fetch the title, and to get correctly translated messages
+	lang := GetLang(c)
 	//The title still has to be passed in the args list, so we get it from there
 	title := fmt.Sprintf("%v", args["title"])
 	//We check if the cookie banner has to be included
@@ -17,9 +19,9 @@ func Render(c *gin.Context, args gin.H) gin.H {
 	//Init the result map with global variables and the title
 	result := gin.H{
 		//The title variable might need to be translated, so we use a key to get the message in the correct language
-		"title": MsgStr("title."+title, GetLang(c), nil) + " | Rewan",
+		"title": GetTitle(title, lang),
 		//We get the language from the context, the language being set beforehand by the global middleware
-		"lang": GetLang(c),
+		"lang": lang,
 		//We get the version from the configuration to display it in the footer
 		"version":            models.Conf.Version,
 		"domain":             models.Conf.BaseUrl,

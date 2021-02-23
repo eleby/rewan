@@ -97,8 +97,8 @@ func main() {
 	r.GET("/contact", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "contact.html", controllers.Render(c, gin.H{"title": "contact"}))
 	})
-	r.GET("/shelf", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "shelf.html", controllers.Render(c, gin.H{"title": "shelf"}))
+	r.GET("/pages", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "pages.html", controllers.Render(c, gin.H{"title": "pages"}))
 	})
 	r.GET("/about/bootstrap", func(c *gin.Context) {
 		lang := controllers.GetLang(c)

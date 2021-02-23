@@ -36,6 +36,14 @@ func GetLang(c *gin.Context) string {
 	}
 }
 
+func GetTitle(key string, lang string) string {
+	suffix := ""
+	if key != "index" {
+		suffix = " | Erwan Le Bihan"
+	}
+	return MsgStr("title."+key, lang, nil) + suffix
+}
+
 //Returns the message as an HTML template - Called in templates
 //Takes a message id, the current language and an extra parameter as entries
 func Msg(id string, lang string, param interface{}) template.HTML {
