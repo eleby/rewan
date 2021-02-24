@@ -86,7 +86,7 @@
   "pages.main.contact.title": "Contact",
   "pages.tools.title": "Gadgets web",
   "pages.tools.time.title": "Time Machine",
-  "pages.tools.memory.title": "Le Jeu de la reine",
+  "pages.tools.memory.title": "Jeu de Mémoire",
   "pages.secondary.title": "Pages secondaires",
   "pages.secondary.bs.title": "Bootstrap",
   "pages.secondary.play.title": "Play Framework",
@@ -151,6 +151,30 @@
   "secondary.info.website": "<a class=\"hyperlink\" target=\"_blank\" href=\"{{.param}}\">Site web</a>",
   "secondary.info.wiki": "<a class=\"hyperlink\" target=\"_blank\" href=\"{{.param}}\">Wikipedia</a>",
 
+  "alt.me": "Image de Erwan Le Bihan, propriétaire du site, en pixel art.",
+
+  "alt.scridle": "Logo du site web Scridle utilisé pour afficher une image du projet.",
+  "alt.ostily": "Logo du site web Ostily utilisé pour afficher une image du projet.",
+  "alt.ohpirate": "Logo du site web Ohpirate utilisé pour afficher une image du projet.",
+  "alt.rewan": "Logo du site web Rewan.dev utilisé pour afficher une image du projet.",
+
+  "alt.pages.bootstrap": "Image sur le bouton conduisant à la page de description de Bootstrap : Le logo de Bootstrap.",
+  "alt.pages.play": "Image sur le bouton conduisant à la page de description de Play Framework : Le logo de Play Framework.",
+  "alt.pages.letsencrypt": "Image sur le bouton conduisant à la page de description de Let's Encrypt : Le logo de Let's Encrypt.",
+  "alt.pages.gandi": "Image sur le bouton conduisant à la page de description de Gandi : Le logo de Gandi.",
+  "alt.pages.go": "Image sur le bouton conduisant à la page de description de Go : Le logo de Go et sa mascotte.",
+  "alt.pages.gin": "Image sur le bouton conduisant à la page de description de Gin Gonic : Le logo de Gin Gonic.",
+  "alt.pages.rouen": "Image sur le bouton conduisant à la page de description de Rouen : Une photographie de Rouen.",
+  "alt.pages.v2": "Image sur le bouton conduisant à la page de description de la v2 du site : Le nouveau logo du site.",
+
+  "alt.wiki.bootstrap": "Bannière de la page : Logo de Bootstrap, le framework CSS le plus utilisé, créé par Twitter.",
+  "alt.wiki.play": "Bannière de la page : Logo de Play Framework, un framework Java/Scala efficace et populaire.",
+  "alt.wiki.letsencrypt": "Bannière de la page : Logo de Let's Encrypt, une autorité de certification gratuite.",
+  "alt.wiki.gandi": "Bannière de la page : Logo de Gandi, un hébergeur web.",
+  "alt.wiki.go": "Bannière de la page : Logo de Go, le langage de programmation créé par Google, devant lequel se tient une image de sa mascotte, le Gopher.",
+  "alt.wiki.gin": "Bannière de la page : Logo de Gin Gonic, le framework Go le plus populaire.",
+  "alt.wiki.rouen": "Bannière de la page : Image de Rouen, une ville de Normandie, au nord de la France.",
+
   "sitemap.error.filewrite": "Impossible d'écrire le fichier : {{.param}}",
 
   "mail.error.captcha": "Captcha non complété",
@@ -161,7 +185,6 @@
   "cookie.error.notfound": "Cookie non trouvé",
 
   "500": "Erreur 500 : Erreur serveur. Sauvegardée avec l'identifiant : {{.param}}",
-
 
   "404.title": "<span class='text-info'><i class='fas fa-lg fa-exclamation-triangle'></i> Erreur 404 :</span> page <span class='text-info'>{{.param}}</span> introuvable",
   "404.content": "J'y ai mis mon cœur, j'y ai mis mes tripes, j'ai même essayé mes <span class='text-info'>pouvoirs magiques</span>, mais je ne puis trouver cette page. <span class='text-warning'>Désolé</span>.",

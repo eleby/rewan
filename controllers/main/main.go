@@ -104,8 +104,9 @@ func main() {
 		lang := controllers.GetLang(c)
 		titleContent := controllers.MsgStr("bootstrap.main.title", lang, nil)
 		textContent := controllers.MsgStr("bootstrap.main.content", lang, nil)
+		alt := controllers.MsgStr("alt.wiki.bootstrap", lang, nil)
 		c.HTML(http.StatusOK, "wiki.html", controllers.Render(c,
-			gin.H{"title": "bootstrap", "image": "bootstrap.svg",
+			gin.H{"title": "bootstrap", "image": "bootstrap.svg", "alt": alt,
 				"credits": "", "titleContent": titleContent, "textContent": textContent,
 				"website": "https://getbootstrap.com/", "wiki": "https://en.wikipedia.org/wiki/Bootstrap_(framework)"}))
 	})
@@ -113,8 +114,9 @@ func main() {
 		lang := controllers.GetLang(c)
 		titleContent := controllers.MsgStr("play.main.title", lang, nil)
 		textContent := controllers.MsgStr("play.main.content", lang, nil)
+		alt := controllers.MsgStr("alt.wiki.play", lang, nil)
 		c.HTML(http.StatusOK, "wiki.html", controllers.Render(c,
-			gin.H{"title": "play", "image": "play.svg",
+			gin.H{"title": "play", "image": "play.svg", "alt": alt,
 				"credits": "", "titleContent": titleContent, "textContent": textContent,
 				"website": "https://www.playframework.com/", "wiki": "https://en.wikipedia.org/wiki/Play_Framework"}))
 	})
@@ -122,8 +124,9 @@ func main() {
 		lang := controllers.GetLang(c)
 		titleContent := controllers.MsgStr("letsencrypt.main.title", lang, nil)
 		textContent := controllers.MsgStr("letsencrypt.main.content", lang, nil)
+		alt := controllers.MsgStr("alt.wiki.letsencrypt", lang, nil)
 		c.HTML(http.StatusOK, "wiki.html", controllers.Render(c,
-			gin.H{"title": "letsencrypt", "image": "letsencrypt.svg",
+			gin.H{"title": "letsencrypt", "image": "letsencrypt.svg", "alt": alt,
 				"credits": "", "titleContent": titleContent, "textContent": textContent,
 				"website": "https://letsencrypt.org/", "wiki": "https://en.wikipedia.org/wiki/Let%27s_Encrypt"}))
 	})
@@ -131,8 +134,9 @@ func main() {
 		lang := controllers.GetLang(c)
 		titleContent := controllers.MsgStr("gandi.main.title", lang, nil)
 		textContent := controllers.MsgStr("gandi.main.content", lang, nil)
+		alt := controllers.MsgStr("alt.wiki.gandi", lang, nil)
 		c.HTML(http.StatusOK, "wiki.html", controllers.Render(c,
-			gin.H{"title": "gandi", "image": "gandi.svg",
+			gin.H{"title": "gandi", "image": "gandi.svg", "alt": alt,
 				"credits": "", "titleContent": titleContent, "textContent": textContent,
 				"website": "https://www.gandi.net/en", "wiki": "https://en.wikipedia.org/wiki/Gandi"}))
 	})
@@ -140,8 +144,9 @@ func main() {
 		lang := controllers.GetLang(c)
 		titleContent := controllers.MsgStr("go.main.title", lang, nil)
 		textContent := controllers.MsgStr("go.main.content", lang, nil)
+		alt := controllers.MsgStr("alt.wiki.go", lang, nil)
 		c.HTML(http.StatusOK, "wiki.html", controllers.Render(c,
-			gin.H{"title": "go", "image": "go.svg",
+			gin.H{"title": "go", "image": "go.svg", "alt": alt,
 				"credits": "", "titleContent": titleContent, "textContent": textContent,
 				"website": "https://golang.org/", "wiki": "https://fr.wikipedia.org/wiki/Go_(langage)"}))
 	})
@@ -149,8 +154,9 @@ func main() {
 		lang := controllers.GetLang(c)
 		titleContent := controllers.MsgStr("gin.main.title", lang, nil)
 		textContent := controllers.MsgStr("gin.main.content", lang, nil)
+		alt := controllers.MsgStr("alt.wiki.gin", lang, nil)
 		c.HTML(http.StatusOK, "wiki.html", controllers.Render(c,
-			gin.H{"title": "gin", "image": "gin.png",
+			gin.H{"title": "gin", "image": "gin.png", "alt": alt,
 				"credits": "", "titleContent": titleContent, "textContent": template.HTML(textContent),
 				"website": "https://gin-gonic.com/"}))
 	})
@@ -159,10 +165,14 @@ func main() {
 		credits := controllers.MsgStr("rouen.credits", lang, nil)
 		titleContent := controllers.MsgStr("rouen.main.title", lang, nil)
 		textContent := controllers.MsgStr("rouen.main.content", lang, nil)
+		alt := controllers.MsgStr("alt.wiki.rouen", lang, nil)
 		c.HTML(http.StatusOK, "wiki.html", controllers.Render(c,
-			gin.H{"title": "rouen", "image": "rouen.jpg",
+			gin.H{"title": "rouen", "image": "rouen.jpg", "alt": alt,
 				"credits": credits, "titleContent": titleContent, "textContent": textContent,
 				"website": "https://rouen.fr/", "wiki": "https://fr.wikipedia.org/wiki/Rouen"}))
+	})
+	r.GET("/about/2.0", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "version.html", controllers.Render(c, gin.H{"title": "version"}))
 	})
 	r.GET("/tools/memory", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "memory.html", controllers.Render(c, gin.H{"title": "memory"}))
@@ -179,9 +189,6 @@ func main() {
 	r.GET("/tools/memory/game/row/:rowId/piece/:pieceId/type", memorygame.GetPieceType())
 	r.POST("/contact/mail", controllers.SendMail())
 	r.GET("/tools/time/get/:query/:year/:month/:day/:hour/:minute", controllers.GetTimeMachine())
-	r.GET("/about/2.0", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "version.html", controllers.Render(c, gin.H{"title": "version"}))
-	})
 	r.GET("/sitemap.xml", controllers.RenderSitemap())
 	r.GET("/robots.txt", renderRobotsTxtFile)
 	//Display a page for routes not found (error 404)

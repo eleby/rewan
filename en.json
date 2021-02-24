@@ -151,6 +151,30 @@
   "secondary.info.website": "<a class=\"hyperlink\" target=\"_blank\" href=\"{{.param}}\">Website</a>",
   "secondary.info.wiki": "<a class=\"hyperlink\" target=\"_blank\" href=\"{{.param}}\">Wikipedia</a>",
 
+  "alt.me": "Image of Erwan Le Bihan, owner of the website, as a pixel art.",
+
+  "alt.scridle": "Logo of the Scridle website to display an image of the project.",
+  "alt.ostily": "Logo of the Ostily website to display an image of the project.",
+  "alt.ohpirate": "Logo of the Ohpirate website to display an image of the project.",
+  "alt.rewan": "Logo of the Rewan.dev website to display an image of the project.",
+
+  "alt.pages.bootstrap": "Image on the button leading to Bootstrap's description page : Bootstrap's logo.",
+  "alt.pages.play": "Image on the button leading to Play Framework's description page : Play Framework's logo.",
+  "alt.pages.letsencrypt": "Image on the button leading to the description page of Let's Encrypt : Let's Encrypt logo.",
+  "alt.pages.gandi": "Image on the button leading to Gandi's description page : Gandi's logo.",
+  "alt.pages.go": "Image on the button leading to Go's description page : Go's logo and mascot.",
+  "alt.pages.gin": "Image on the button leading to Gin Gonic's description page : Gin Gonic's logo.",
+  "alt.pages.rouen": "Image on the button leading to Rouen's description page : A photography of Rouen.",
+  "alt.pages.v2": "Image on the button leading to the website's second version description page : The new logo of the website.",
+
+  "alt.wiki.bootstrap": "Banner of the page : logo of Bootstrap, the most used CSS Framework, created by Twitter.",
+  "alt.wiki.play": "Banner of the page : logo of Play Framework, an efficient and popular Java/Scala framework.",
+  "alt.wiki.letsencrypt": "Banner of the page : logo of Let's Encrypt, a free certificate authority.",
+  "alt.wiki.gandi": "Banner of the page : logo of Gandi, a web hosting service.",
+  "alt.wiki.go": "Banner of the page : logo of Go, the programming language made by Google, and image of the Gopher, its mascot, in front of it.",
+  "alt.wiki.gin": "Banner of the page : logo of Gin Gonic, the most popular web framework for Go.",
+  "alt.wiki.rouen": "Banner of the page : Picture of Rouen, a city of Normandy, in the north of France.",
+
   "sitemap.error.filewrite": "Unable to write file: {{.param}}",
 
   "mail.error.captcha": "Invalid captcha",

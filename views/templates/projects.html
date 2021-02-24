@@ -12,7 +12,7 @@
     <div class="card cardRounded">
         <div class="card-body card-padding">
             <h1 class="card-title align-center">{{msg "projects.scridle.title" .lang nil}}</h1>
-            <img class="projects-img" src="/resources/img/scridle.png"><br>
+            <img class="projects-img" alt="{{msg "alt.scridle" .lang nil}}" src="/resources/img/scridle.png"><br>
             <p class="card-text">{{msg "projects.scridle.body" .lang nil}}</p>
         </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="card cardRounded">
         <div class="card-body card-padding">
             <h1 class="card-title align-center">{{msg "projects.ost.title" .lang nil}}</h1>
-            <img class="projects-img" src="/resources/img/ostily.png"><br>
+            <img class="projects-img" alt="{{msg "alt.ostily" .lang nil}}" src="/resources/img/ostily.png"><br>
             <p class="card-text">{{msg "projects.ost.body" .lang nil}}</p>
         </div>
     </div>
@@ -32,7 +32,7 @@
     <div class="card cardRounded">
         <div class="card-body card-padding">
             <h1 class="card-title align-center">{{msg "projects.ohp.title" .lang nil}}</h1>
-            <img class="projects-img" src="/resources/img/ohpirate.png"><br>
+            <img class="projects-img" alt="{{msg "alt.ohpirate" .lang nil}}" src="/resources/img/ohpirate.png"><br>
             <p class="card-text">{{msg "projects.ohp.body" .lang nil}}</p>
         </div>
     </div>
@@ -41,8 +41,11 @@
 <div class="container mb-6 mt-4">
     <div class="card cardRounded">
         <div class="card-body card-padding">
+            <a class="hyperlink position-absolute" target="_blank" href="https://github.com/eleby/rewan">
+                <i class="fab fa-2x fa-github"></i>
+            </a>
             <h1 class="card-title align-center">{{msg "projects.rew.title" .lang nil}}</h1>
-            <img class="projects-img" src="/resources/img/elb.svg"><br>
+            <img class="projects-img" alt="{{msg "alt.rewan" .lang nil}}" src="/resources/img/elb.svg"><br>
             <p class="card-text">{{msg "projects.rew.body" .lang nil}}</p>
         </div>
     </div>
