@@ -102,6 +102,9 @@ footer {
 }
 
 .navbar-toggler {
+    text-decoration: none !important;
+    outline: none !important;
+    box-shadow: none !important;
     padding: 0.25rem 0.55rem;
     font-size: 1rem;
     line-height: 1;
@@ -111,7 +114,14 @@ footer {
 }
 
 .navbar-toggler:hover, .navbar-toggler:focus {
-    text-decoration: none;
+    text-decoration: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: var(--color-clear) !important;
+}
+
+.navbar-toggler:hover .navbar-toggler-icon, .navbar-toggler:focus .navbar-toggler-icon {
+    background-image: var(--toggler-alt-url) !important;
 }
 
 .navbar-toggler-icon {
