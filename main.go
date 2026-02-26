@@ -8,18 +8,18 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"rewan/controllers"
-	"rewan/controllers/routines"
-	"rewan/models"
-	"rewan/models/memorygame"
-	"rewan/models/persistence"
+	"rewan.dev/controllers"
+	"rewan.dev/controllers/routines"
+	"rewan.dev/models"
+	"rewan.dev/models/memorygame"
+	"rewan.dev/models/persistence"
 	"strconv"
 )
 
-/** AUTHOR : Erwan Le Bihan **/
-/** The source code is open for anyone to see it. **/
+/** AUTHOR : Erwan Le Bihan / @eleby              **/
+/** The source code is open for anyone to see. **/
 
-//Functions we can use in templates
+// Functions we can use in templates
 var funcMap = template.FuncMap{
 	"msg":         controllers.Msg,
 	"timeMachine": controllers.TimeMachine,
@@ -49,6 +49,8 @@ func main() {
 	log.SetOutput(multiWriter)
 	//Init gin router
 	r := gin.New()
+	//Set trusted proxies
+	r.SetTrustedProxies(models.Conf.TrustedProxies)
 	//Init language files
 	controllers.InitBundle()
 	//This path is used for resources (css, img, js). The sitemap can also be placed here

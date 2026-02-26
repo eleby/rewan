@@ -5,16 +5,16 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
-	"rewan/controllers"
-	"rewan/controllers/routines"
-	"rewan/models"
-	"rewan/models/persistence"
+	"rewan.dev/controllers"
+	"rewan.dev/controllers/routines"
+	"rewan.dev/models"
+	"rewan.dev/models/persistence"
 	"strconv"
 	"strings"
 	"time"
 )
 
-//Variable holding an entire game
+// Variable holding an entire game
 type MemoryGame struct {
 	Time              int
 	Cols              int
@@ -31,7 +31,7 @@ type MemoryGame struct {
 	Success           int
 }
 
-//Enum containing a value for each possible game state
+// Enum containing a value for each possible game state
 type gameStateValue int
 
 const (
@@ -40,27 +40,27 @@ const (
 	SUCCESS = iota
 )
 
-//An object to be able to compare values by enum name
+// An object to be able to compare values by enum name
 type gameStateObj struct {
 	RUNNING gameStateValue
 	FAILED  gameStateValue
 	SUCCESS gameStateValue
 }
 
-//Minimum number of queen pieces
+// Minimum number of queen pieces
 const minQueensGoal = 2
 
-//Number of cols and rows at difficulty 0
+// Number of cols and rows at difficulty 0
 const minCols = 3
 const minRows = 3
 
-//Object containing the game state enum
+// Object containing the game state enum
 var GameState = gameStateObj{RUNNING, FAILED, SUCCESS}
 
-//Var containing all the Piece types which can be converted to queens
+// Var containing all the Piece types which can be converted to queens
 var convertibleTypes = []PieceTypeValue{NOTHING, PAWN, KNIGHT, BISHOP, ROOK}
 
-//Generate and return a MemoryGame
+// Generate and return a MemoryGame
 func GenerateBoard(difficulty int) MemoryGame {
 	log.Printf("memorygame.go > GenerateBoard [ %v ]", difficulty)
 	//This var will contain, after an initial generation, all the
@@ -135,7 +135,7 @@ func GenerateBoard(difficulty int) MemoryGame {
 	return MemoryGame{timeHide, cols, rows, fontSize, int(queensGoal), queens, diff, board, convertiblePieces, RUNNING, ";", 0, 0}
 }
 
-//Returns an array of rows with all the pieces of the game, used for the Board variable of the MemoryGame
+// Returns an array of rows with all the pieces of the game, used for the Board variable of the MemoryGame
 func getCompleteBoard(queensGoal int, nbCols int, nbRows int) ([]Row, int) {
 	log.Printf("memorygame.go > getCompleteBoard [ %v / %v / %v ]", queensGoal, nbCols, nbRows)
 	//Generate a random array of rows with random pieces in each row
@@ -153,7 +153,7 @@ func getCompleteBoard(queensGoal int, nbCols int, nbRows int) ([]Row, int) {
 	return rows, newQueens
 }
 
-//Returns all the pieces, with random ones changed to queen pieces.
+// Returns all the pieces, with random ones changed to queen pieces.
 func getConvertedPieces(convertiblePieces []Piece, queensGoal int) ([]Piece, int) {
 	log.Printf("memorygame.go > getConvertedPieces [ %v ]", queensGoal)
 	//First a slice of ints is declared; it will hold the index of each piece to convert
@@ -189,7 +189,7 @@ func getConvertedPieces(convertiblePieces []Piece, queensGoal int) ([]Piece, int
 	return convertiblePieces, queens
 }
 
-///Function returning every piece with its type being included in the convertibleTypes array
+// /Function returning every piece with its type being included in the convertibleTypes array
 func getConvertiblePieces(rows []Row) []Piece {
 	log.Print("memorygame.go > getConvertiblePieces")
 	var convertiblePieces []Piece
@@ -210,7 +210,7 @@ func getConvertiblePieces(rows []Row) []Piece {
 	return convertiblePieces
 }
 
-//Generate a random array of rows with random pieces in each row
+// Generate a random array of rows with random pieces in each row
 func getGeneratedBoard(nbCols int, nbRows int) []Row {
 	log.Printf("memorygame.go > getGeneratedBoard [ %v / %v ]", nbCols, nbRows)
 	var rows []Row
@@ -220,10 +220,10 @@ func getGeneratedBoard(nbCols int, nbRows int) []Row {
 	return rows
 }
 
-//Called for a card when the user clicks on it, or for every card
-//at the end of the game, this function gets the type of the
-//card's piece and sets the game's state to rely on the server and avoid
-//any possibility of cheating.
+// Called for a card when the user clicks on it, or for every card
+// at the end of the game, this function gets the type of the
+// card's piece and sets the game's state to rely on the server and avoid
+// any possibility of cheating.
 func GetPieceType() gin.HandlerFunc {
 	log.Print("memorygame.go > GetPieceType")
 	return func(c *gin.Context) {
@@ -282,7 +282,7 @@ func GetPieceType() gin.HandlerFunc {
 	}
 }
 
-//The two next functions are used to get enum values by their names
+// The two next functions are used to get enum values by their names
 func (gs gameStateValue) String() string {
 	return [...]string{"RUNNING", "FAILED", "SUCCESS"}[gs]
 }
@@ -291,7 +291,7 @@ func (gs gameStateValue) StringLower() string {
 	return [...]string{"running", "failed", "success"}[gs]
 }
 
-//Resets the game to level 0, flashes a message and redirects to the game
+// Resets the game to level 0, flashes a message and redirects to the game
 func Reset() gin.HandlerFunc {
 	log.Print("memorygame.go > Reset")
 	return func(c *gin.Context) {
@@ -301,7 +301,7 @@ func Reset() gin.HandlerFunc {
 	}
 }
 
-//Finishes the game and sets the difficulty accordingly; also flashes a message
+// Finishes the game and sets the difficulty accordingly; also flashes a message
 func Finish() gin.HandlerFunc {
 	log.Print("memorygame.go > Finish")
 	return func(c *gin.Context) {
@@ -322,7 +322,7 @@ func Finish() gin.HandlerFunc {
 	}
 }
 
-//Check if the array contains the value
+// Check if the array contains the value
 func contains(i []PieceTypeValue, j PieceTypeValue) bool {
 	for _, v := range i {
 		if v == j {
@@ -333,7 +333,7 @@ func contains(i []PieceTypeValue, j PieceTypeValue) bool {
 	return false
 }
 
-//Sets and returns a memory game
+// Sets and returns a memory game
 func GetSetMemoryGame(c *gin.Context) MemoryGame {
 	log.Print("memorygame.go > GetSetMemoryGame")
 	isSecure := gin.Mode() == gin.ReleaseMode
@@ -369,7 +369,7 @@ func GetSetMemoryGame(c *gin.Context) MemoryGame {
 	return game
 }
 
-//Gets the current memory game; if it does not exist it creates a new one at difficulty 1
+// Gets the current memory game; if it does not exist it creates a new one at difficulty 1
 func GetMemoryGame(c *gin.Context) MemoryGame {
 	log.Print("memorygame.go > GetMemoryGame")
 	uid, err := c.Cookie("token")
@@ -386,7 +386,7 @@ func GetMemoryGame(c *gin.Context) MemoryGame {
 	return game
 }
 
-//Creates and stores a memorygame with the indicated difficulty
+// Creates and stores a memorygame with the indicated difficulty
 func SetMemoryGame(c *gin.Context, difficulty int) {
 	log.Print("memorygame.go > SetMemoryGame")
 	uid, err := c.Cookie("token")

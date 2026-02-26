@@ -28,10 +28,12 @@ type Config struct {
 	//Sitemap url and path
 	SitemapBaseUrl  string
 	SitemapBasePath string
+	//Trusted proxies
+	TrustedProxies []string
 }
 
-//Get the configuration to use for the next actions
-//and put it in a global variable to only decode the conf file once
+// Get the configuration to use for the next actions
+// and put it in a global variable to only decode the conf file once
 var Conf = GetConf()
 
 func GetConf() Config {

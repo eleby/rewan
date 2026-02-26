@@ -3,12 +3,12 @@ package routines
 import (
 	"github.com/gin-gonic/gin"
 	"log"
-	"rewan/models"
+	"rewan.dev/models"
 	"sync"
 	"time"
 )
 
-//Function creating a goroutine to manage stored variables
+// Function creating a goroutine to manage stored variables
 func IndexRemovalRoutine(array *sync.Map, index string, duration time.Duration, c *gin.Context, conf models.Config, isSecure bool) {
 	log.Print("IndexRemovalRoutine > Launching goroutine..")
 	//Goroutine launch

@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"net/smtp"
 	"net/url"
-	"rewan/models"
+	"rewan.dev/models"
 	"strconv"
 )
 
-//Function used to send a simple email to the configured receiver after verifying the captcha
-//(Here the sender also is the receiver)
+// Function used to send a simple email to the configured receiver after verifying the captcha
+// (Here the sender also is the receiver)
 func SendMail() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Print("email.go > SendMail")
@@ -84,8 +84,8 @@ func SendMail() gin.HandlerFunc {
 	}
 }
 
-//This function simplifies the email generation
-//by translating standard arguments (sender, receiver, subject, content) to an email
+// This function simplifies the email generation
+// by translating standard arguments (sender, receiver, subject, content) to an email
 func getMailContent(sender string, receiver string, subject string, content string) string {
 	log.Printf("email.go > getMailContent [ %v / %v / %v / %v ]", sender, receiver, subject, content)
 	msg := "To: <" + models.Conf.SmtpSender + ">\nFrom: <" + models.Conf.SmtpSender + ">\nSubject: " + subject + "\n" + content
