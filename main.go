@@ -40,8 +40,6 @@ type MLPResponse struct {
 }
 
 func initMLP() {
-	trainFromImages()
-	
 	data, err := os.ReadFile("aigo/mlp_weights.json")
 	if err != nil {
 		fmt.Println("Warning: Could not load MLP weights:", err)

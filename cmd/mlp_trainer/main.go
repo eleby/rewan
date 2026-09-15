@@ -21,8 +21,8 @@ type Weights struct {
 }
 
 func main() {
-	dir := "/var/www/html/rewan.dev/aigo/training"
-	out := "/var/www/html/rewan.dev/aigo/mlp_weights.json"
+	dir := "aigo/training"
+	out := "aigo/mlp_weights.json"
 	os.Remove(out)
 	
 	fmt.Println("Chargement des images depuis", dir)

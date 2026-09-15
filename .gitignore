@@ -1,6 +1,5 @@
 main
-mlp_trainer
-cmd/mlp_trainer/mlp_trainer
+/mlp_trainer
 aigo/training/
 rewan.dev
 *.exe

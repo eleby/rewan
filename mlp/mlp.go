@@ -1,4 +1,4 @@
-package main
+package mlp
 
 import (
 	"encoding/json"
