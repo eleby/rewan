@@ -1,0 +1,4 @@
+main
+mlp_trainer
+cmd/mlp_trainer/mlp_trainer
+*.exe
