@@ -5,20 +5,20 @@ import (
 	"io/ioutil"
 	"log"
 	"regexp"
-	"rewan/models"
+	"rewan.dev/models"
 	"time"
 )
 
-//Sitemap file path
+// Sitemap file path
 var FILE string
 
-//Base URL of the website
+// Base URL of the website
 var BASEURL string
 
-//Header tag for the XML content
+// Header tag for the XML content
 var HEADER = "<?xml version='1.0' encoding='UTF-8'?>"
 
-//List of tags used for the XML content
+// List of tags used for the XML content
 var URLSETOPEN = "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>"
 var URLOPEN = "<url>"
 var LOCOPEN = "<loc>"
@@ -28,12 +28,12 @@ var MODCLOSE = "</lastmod>"
 var URLCLOSE = "</url>"
 var URLSETCLOSE = "</urlset>"
 
-//XML content we append elements to
+// XML content we append elements to
 var txt string
 
-//Called from the main function, it generates the sitemap.
-//The Engine param allows to get a list of the routes, and the
-//Config parameter allows to get the file path
+// Called from the main function, it generates the sitemap.
+// The Engine param allows to get a list of the routes, and the
+// Config parameter allows to get the file path
 func GenerateSitemap(e *gin.Engine) {
 	log.Print("sitemap.go > GenerateSitemap")
 	//We first use the conf parameter to init the FILE and BASEURL variables
@@ -47,7 +47,7 @@ func GenerateSitemap(e *gin.Engine) {
 	}
 }
 
-//Function used to create the content for the file
+// Function used to create the content for the file
 func getSitemapStr(e *gin.Engine) string {
 	log.Print("sitemap.go > getSitemapStr")
 	//First of all, we add the header to specify the XML nature of this file
@@ -72,7 +72,7 @@ func getSitemapStr(e *gin.Engine) string {
 	return txt
 }
 
-//Function called for each URL, which writes all necessary XML tags to the txt variable
+// Function called for each URL, which writes all necessary XML tags to the txt variable
 func appendElement(page string) {
 	log.Printf("sitemap.go > appendElement [ %v ]", page)
 	//Getting the current time
@@ -93,7 +93,7 @@ func appendElement(page string) {
 	*str += URLCLOSE
 }
 
-//Sitemap renderer function to make the sitemap accessible to /sitemap.xml
+// Sitemap renderer function to make the sitemap accessible to /sitemap.xml
 func RenderSitemap() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.File(models.Conf.SitemapBasePath + "/sitemap.xml")

@@ -5,17 +5,17 @@ import (
 	"io"
 	"log"
 	"os"
-	"rewan/models"
+	"rewan.dev/models"
 	"time"
 )
 
-//Size of a megabyte in bytes
+// Size of a megabyte in bytes
 const MB = 1000000
 
-//Limit of 10 megabytes
+// Limit of 10 megabytes
 var MAXLOGSIZE = int64(MB * 10)
 
-//Function creating a goroutine to manage log files
+// Function creating a goroutine to manage log files
 func ManageLogsRoutine() {
 	log.Print("ManageLogsRoutine > Launching goroutine..")
 	//The check is made every day
@@ -37,8 +37,8 @@ func ManageLogsRoutine() {
 	}()
 }
 
-//Function to check the size of a log file, and manage it if it is too big
-//[name] is the path of the file, [isErr] is the type of logger it is connected to
+// Function to check the size of a log file, and manage it if it is too big
+// [name] is the path of the file, [isErr] is the type of logger it is connected to
 func processLogFile(name string, isErr bool) {
 	//Open the file
 	f, _ := os.Open(models.Conf.LogDir + name)

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
-	"rewan/models"
+	"rewan.dev/models"
 )
 
-//Function used to pass global variables easier, and to simplify the code
+// Function used to pass global variables easier, and to simplify the code
 func Render(c *gin.Context, args gin.H) gin.H {
 	log.Print("http.go > Render")
 	//The lang is used to fetch the title, and to get correctly translated messages

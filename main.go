@@ -10,11 +10,11 @@ import (
 	"math"
 	"net/http"
 	"os"
-	"rewan/controllers"
-	"rewan/controllers/routines"
-	"rewan/models"
-	"rewan/models/memorygame"
-	"rewan/models/persistence"
+	"rewan.dev/controllers"
+	"rewan.dev/controllers/routines"
+	"rewan.dev/models"
+	"rewan.dev/models/memorygame"
+	"rewan.dev/models/persistence"
 	"strconv"
 )
 
@@ -40,6 +40,8 @@ type MLPResponse struct {
 }
 
 func initMLP() {
+	trainFromImages()
+	
 	data, err := os.ReadFile("aigo/mlp_weights.json")
 	if err != nil {
 		fmt.Println("Warning: Could not load MLP weights:", err)
@@ -168,6 +170,7 @@ func main() {
 	log.SetOutput(multiWriter)
 
 	r := gin.New()
+	r.SetTrustedProxies(models.Conf.TrustedProxies)
 	controllers.InitBundle()
 	r.Static("/resources", "./resources")
 	r.SetFuncMap(funcMap)
