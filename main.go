@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"html/template"
 	"io"
 	"log"
+	"math"
 	"net/http"
 	"os"
 	"rewan.dev/controllers"
@@ -16,10 +18,6 @@ import (
 	"strconv"
 )
 
-/** AUTHOR : Erwan Le Bihan / @eleby              **/
-/** The source code is open for anyone to see. **/
-
-// Functions we can use in templates
 var funcMap = template.FuncMap{
 	"msg":         controllers.Msg,
 	"timeMachine": controllers.TimeMachine,
@@ -28,49 +26,162 @@ var funcMap = template.FuncMap{
 	"cornerClass": memorygame.GetCornerClass,
 }
 
+var mlpWeights [][][]float64
+var mlpBiases [][]float64
+
+type MLPRequest struct {
+	Pixels []float64 `json:"pixels"`
+}
+
+type MLPResponse struct {
+	Class         int       `json:"class"`
+	Probabilities []float64 `json:"probabilities"`
+	Confidence    float64   `json:"confidence"`
+}
+
+func initMLP() {
+	trainFromImages()
+	
+	data, err := os.ReadFile("aigo/mlp_weights.json")
+	if err != nil {
+		fmt.Println("Warning: Could not load MLP weights:", err)
+		return
+	}
+
+	var weightsData struct {
+		Weights [][][]float64 `json:"weights"`
+		Biases  [][]float64   `json:"biases"`
+	}
+	if err := json.Unmarshal(data, &weightsData); err != nil {
+		fmt.Println("Warning: Could not parse MLP weights:", err)
+		return
+	}
+
+	mlpWeights = weightsData.Weights
+	mlpBiases = weightsData.Biases
+	fmt.Println("MLP weights loaded successfully")
+}
+
+func handleMLPPredict(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var req MLPRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	if len(req.Pixels) != 256 {
+		http.Error(w, "Expected 256 pixels", http.StatusBadRequest)
+		return
+	}
+
+	output := predictMLP(req.Pixels)
+	class := argmaxMLP(output)
+	confidence := 0.0
+	if len(output) >= 2 {
+		if output[0] > output[1] {
+			confidence = output[0] - output[1]
+		} else {
+			confidence = output[1] - output[0]
+		}
+	}
+
+	resp := MLPResponse{
+		Class:         class,
+		Probabilities: output,
+		Confidence:    confidence,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(resp)
+}
+
+func predictMLP(input []float64) []float64 {
+	current := make([]float64, len(input))
+	copy(current, input)
+
+	for l := 0; l < len(mlpWeights); l++ {
+		next := make([]float64, len(mlpWeights[l]))
+		for j := 0; j < len(mlpWeights[l]); j++ {
+			sum := mlpBiases[l][j]
+			for k := 0; k < len(current); k++ {
+				sum += current[k] * mlpWeights[l][j][k]
+			}
+			if l < len(mlpWeights)-1 {
+				next[j] = math.Tanh(sum)
+			} else {
+				next[j] = sum
+			}
+		}
+		if l == len(mlpWeights)-1 {
+			next = softmaxMLP(next)
+		}
+		current = next
+	}
+	return current
+}
+
+func softmaxMLP(x []float64) []float64 {
+	maxVal := x[0]
+	for _, v := range x {
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+	exp := make([]float64, len(x))
+	sum := 0.0
+	for i, v := range x {
+		exp[i] = math.Exp(v - maxVal)
+		sum += exp[i]
+	}
+	for i := range exp {
+		exp[i] /= sum
+	}
+	return exp
+}
+
+func argmaxMLP(a []float64) int {
+	idx := 0
+	for i := range a {
+		if a[i] > a[idx] {
+			idx = i
+		}
+	}
+	return idx
+}
+
 func main() {
 	releaseMode := os.Args[2] != "dev"
-	//The app goes release mode when the configuration user is not dev
 	if releaseMode {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	//Set logger behavior
-	//Define the log files, open or create them with full permissions granted
+
 	f, _ := os.OpenFile(models.Conf.LogDir+models.Conf.LogFile, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
 	ferr, _ := os.OpenFile(models.Conf.LogDir+models.Conf.ErrLogFile, os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
-	//Set the gin logger to also write in the file
 	multiWriter := io.MultiWriter(f, os.Stdout)
 	errWriter := io.MultiWriter(ferr, os.Stdout)
 	gin.DefaultWriter = multiWriter
 	gin.DefaultErrorWriter = errWriter
-	//Add a prefix to the alternative logger
 	log.SetPrefix("[LOG] ")
-	//Set the other logger to also write in the file
 	log.SetOutput(multiWriter)
-	//Init gin router
+
 	r := gin.New()
-	//Set trusted proxies
 	r.SetTrustedProxies(models.Conf.TrustedProxies)
-	//Init language files
 	controllers.InitBundle()
-	//This path is used for resources (css, img, js). The sitemap can also be placed here
 	r.Static("/resources", "./resources")
-	//Declares which functions we can use in templates
 	r.SetFuncMap(funcMap)
-	//This path is used for templates.
-	//** fetches every directory in /views, and * fetches every template in each directory
 	r.LoadHTMLGlob("views/**/*")
-	//Global middleware, used before every request. Allows to always get the preferred language
+
 	r.Use(func(c *gin.Context) {
-		//Get the preferred language from the "Accept-Language" request header
 		lang := c.Request.Header.Get("Accept-Language")
-		//Set the lang parameter to be used by the render function
 		c.Set("lang", lang)
 		c.Next()
 	})
-	//Recovers from any Panic and render a 500 error page
-	//while logging an error id to allow simple retrieval via
-	//the id we communicate on the page
+
 	r.Use(gin.CustomRecovery(func(c *gin.Context, err interface{}) {
 		errorCode := persistence.GenerateUID()
 		var logger *log.Logger
@@ -84,9 +195,12 @@ func main() {
 			"titleError": template.HTML(title), "contentError": template.HTML(content)}))
 	}))
 
-	//Set the Gin logger to ignore logging the fetching of resources (ex: images)
 	r.Use(gin.LoggerWithConfig(gin.LoggerConfig{SkipPaths: []string{"/resources/*"}}))
-	//Routes to be handled by the router
+
+	// Initialize MLP with real images
+	initMLP()
+
+	// Routes
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", controllers.Render(c, gin.H{"title": "index"}))
 	})
@@ -96,12 +210,44 @@ func main() {
 	r.GET("/projects", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "projects.html", controllers.Render(c, gin.H{"title": "projects"}))
 	})
+	r.GET("/projects/aigo", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "aigo.html", controllers.Render(c, gin.H{"title": "aigo"}))
+	})
 	r.GET("/contact", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "contact.html", controllers.Render(c, gin.H{"title": "contact"}))
 	})
 	r.GET("/pages", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "pages.html", controllers.Render(c, gin.H{"title": "pages"}))
 	})
+
+	// MLP API route
+	r.POST("/api/mlp/predict", func(c *gin.Context) {
+		var req MLPRequest
+		if err := c.ShouldBindJSON(&req); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if len(req.Pixels) != 256 {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "expected 256 pixels (16x16)"})
+			return
+		}
+		output := predictMLP(req.Pixels)
+		class := argmaxMLP(output)
+		confidence := 0.0
+		if len(output) >= 2 {
+			if output[0] > output[1] {
+				confidence = output[0] - output[1]
+			} else {
+				confidence = output[1] - output[0]
+			}
+		}
+		c.JSON(http.StatusOK, MLPResponse{
+			Class:         class,
+			Probabilities: output,
+			Confidence:    confidence,
+		})
+	})
+
 	r.GET("/about/bootstrap", func(c *gin.Context) {
 		lang := controllers.GetLang(c)
 		titleContent := controllers.MsgStr("bootstrap.main.title", lang, nil)
@@ -193,7 +339,7 @@ func main() {
 	r.GET("/tools/time/get/:query/:year/:month/:day/:hour/:minute", controllers.GetTimeMachine())
 	r.GET("/sitemap.xml", controllers.RenderSitemap())
 	r.GET("/robots.txt", renderRobotsTxtFile)
-	//Display a page for routes not found (error 404)
+
 	r.NoRoute(func(c *gin.Context) {
 		lang := controllers.GetLang(c)
 		title := controllers.MsgStr("404.title", lang, c.Request.URL)
@@ -201,11 +347,9 @@ func main() {
 		c.HTML(http.StatusInternalServerError, "error.html", controllers.Render(c, gin.H{"title": "404",
 			"titleError": template.HTML(title), "contentError": template.HTML(content)}))
 	})
-	//Generate the sitemap at each startup
+
 	controllers.GenerateSitemap(r)
-	//Launch the logs management routine
 	routines.ManageLogsRoutine()
-	//Launch the server at the configured TCP port
 	_ = r.Run(":" + strconv.Itoa(models.Conf.Port))
 }
 

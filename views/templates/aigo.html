@@ -1,0 +1,369 @@
+{{ template "header.html" .}}
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <a class="hyperlink position-absolute" target="_blank" href="https://github.com/eleby/aigo">
+                <i class="fab fa-2x fa-github"></i>
+            </a>
+            <h1 class="card-title align-center">{{msg "aigo.title" .lang nil}}</h1>
+            <p class="card-text">{{msg "aigo.intro" .lang nil}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h2 class="card-title">{{msg "aigo.features.title" .lang nil}}</h2>
+            <div class="aigo-feature">
+                <h4>{{msg "aigo.features.functional.title" .lang nil}}</h4>
+                <p>{{msg "aigo.features.functional.body" .lang nil}}</p>
+            </div>
+            <div class="aigo-feature">
+                <h4>{{msg "aigo.features.robust.title" .lang nil}}</h4>
+                <p>{{msg "aigo.features.robust.body" .lang nil}}</p>
+            </div>
+            <div class="aigo-feature">
+                <h4>{{msg "aigo.features.performance.title" .lang nil}}</h4>
+                <p>{{msg "aigo.features.performance.body" .lang nil}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <!-- MLP Test Section -->
+            <h2 class="card-title">{{msg "aigo.mlp.title" .lang nil}}</h2>
+            <p class="card-text text-center mb-3">{{msg "aigo.mlp.desc" .lang nil}}</p>
+
+            <div class="mlp-demo">
+                <div class="mlp-canvas-wrap">
+                    <canvas id="drawing-canvas" width="256" height="256"></canvas>
+                </div>
+                <div class="mlp-prediction" id="prediction">—</div>
+                <div class="mlp-confidence" id="confidence">{{msg "aigo.mlp.draw" .lang nil}}</div>
+                <div class="mlp-probs">
+                    <span class="mlp-prob-circle" id="probCircle">⭕ 0%</span>
+                    <span class="mlp-prob-cross" id="probCross">❌ 0%</span>
+                </div>
+                <button class="btn-clear" onclick="clearCanvas()">{{msg "aigo.mlp.clear" .lang nil}}</button>
+                <div class="mlp-config">MLP 256→128→64→2 | 6000 {{msg "aigo.mlp.images" .lang nil}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h2 class="card-title">{{msg "aigo.usage.title" .lang nil}}</h2>
+            <pre class="code-block">
+package main
+
+import (
+    "fmt"
+    "github.com/eleby/aigo/MLP"
+)
+
+func main() {
+    var init MLP.Init
+    init.NumFeatures = 256
+    init.LayerSizes = []int{128, 64, 2}
+    init.LearningRate = 0.01
+
+    mlp, _ := MLP.CreateNetwork(init)
+    mlp.Train(inputs, targets, 1000)
+    predictions := mlp.Predict(tests)
+}</pre>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h2 class="card-title">{{msg "aigo.architecture.title" .lang nil}}</h2>
+            <p class="card-text">{{msg "aigo.architecture.body" .lang nil}}</p>
+            <ul>
+                <li><strong>{{msg "aigo.arch.nn.label" .lang nil}}</strong> — {{msg "aigo.arch.nn" .lang nil}}</li>
+                <li><strong>{{msg "aigo.arch.gd.label" .lang nil}}</strong> — {{msg "aigo.arch.gd" .lang nil}}</li>
+                <li><strong>{{msg "aigo.arch.af.label" .lang nil}}</strong> — {{msg "aigo.arch.af" .lang nil}}</li>
+                <li><strong>{{msg "aigo.arch.lf.label" .lang nil}}</strong> — {{msg "aigo.arch.lf" .lang nil}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-6 mt-4">
+    <div class="card cardRounded">
+        <div class="card-body card-padding">
+            <h2 class="card-title">{{msg "aigo.links.title" .lang nil}}</h2>
+            <p>
+                <a class="hyperlink" target="_blank" href="https://github.com/eleby/aigo">
+                    <i class="fab fa-github"></i> {{msg "aigo.links.github" .lang nil}}
+                </a>
+            </p>
+            <p>
+                <a class="hyperlink" target="_blank" href="https://pkg.go.dev/github.com/eleby/aigo">
+                    <i class="fas fa-book"></i> {{msg "aigo.links.docs" .lang nil}}
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+.aigo-feature {
+    margin-bottom: 16px;
+}
+.aigo-feature h4 {
+    color: var(--color-clear);
+    margin-bottom: 4px;
+}
+.mlp-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+}
+.mlp-canvas-wrap {
+    width: 256px;
+    height: 256px;
+    border: 2px solid var(--color-clear);
+    border-radius: 4px;
+    background: #000;
+    touch-action: none;
+}
+#drawing-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    cursor: crosshair;
+}
+.mlp-prediction {
+    font-size: 2.5rem;
+    font-weight: bold;
+    min-height: 50px;
+    text-align: center;
+}
+.mlp-prediction.circle { color: var(--color-success); }
+.mlp-prediction.cross { color: var(--color-error); }
+.mlp-confidence {
+    font-size: 0.9rem;
+    color: var(--color-clear);
+    text-align: center;
+    opacity: 0.8;
+}
+.mlp-probs {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-size: 1.1rem;
+    color: var(--color-clear);
+}
+.mlp-prob-circle { color: var(--color-success); }
+.mlp-prob-cross { color: var(--color-error); }
+.btn-clear {
+    background: var(--color-darker);
+    color: var(--color-clear);
+    border: 1px solid var(--color-clear);
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-clear:hover {
+    background: var(--color-dark);
+}
+.mlp-config {
+    font-size: 0.75rem;
+    color: var(--color-clear);
+    opacity: 0.5;
+    text-align: center;
+}
+
+@media (max-width: 400px) {
+    .mlp-canvas-wrap { width: 240px; height: 240px; }
+    .mlp-prediction { font-size: 2rem; }
+}
+</style>
+
+<script>
+(function() {
+    const canvas = document.getElementById('drawing-canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let hasDrawn = false;
+    let lastX = 0, lastY = 0;
+    let predictTimeout = null;
+
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 12;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        if (e.touches && e.touches.length > 0) {
+            return {
+                x: (e.touches[0].clientX - rect.left) * scaleX,
+                y: (e.touches[0].clientY - rect.top) * scaleY
+            };
+        }
+        return {
+            x: (e.clientX - rect.left) * scaleX,
+            y: (e.clientY - rect.top) * scaleY
+        };
+    }
+
+    function startDraw(e) {
+        if (e.cancelable) e.preventDefault();
+        drawing = true;
+        hasDrawn = true;
+        const p = getPos(e);
+        lastX = p.x;
+        lastY = p.y;
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+        if (e.cancelable) e.preventDefault();
+        const p = getPos(e);
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        lastX = p.x;
+        lastY = p.y;
+        clearTimeout(predictTimeout);
+        predictTimeout = setTimeout(predict, 150);
+    }
+
+    function endDraw(e) {
+        if (!drawing) return;
+        drawing = false;
+        if (hasDrawn) predict();
+    }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', endDraw);
+
+    window.clearCanvas = function() {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        hasDrawn = false;
+        document.getElementById('prediction').textContent = '—';
+        document.getElementById('prediction').className = 'mlp-prediction';
+        document.getElementById('confidence').textContent = document.getElementById('confidence').dataset.default || 'Draw to test the model!';
+        document.getElementById('probCircle').textContent = '⭕ 0%';
+        document.getElementById('probCross').textContent = '❌ 0%';
+    };
+
+    document.getElementById('confidence').dataset.default = document.getElementById('confidence').textContent;
+
+    function getCanvasData() {
+        const imgData = ctx.getImageData(0, 0, 256, 256);
+        const binarized = new Uint8Array(256 * 256);
+        for (let i = 0; i < 256 * 256; i++) {
+            const idx = i * 4;
+            const r = imgData.data[idx];
+            const g = imgData.data[idx + 1];
+            const b = imgData.data[idx + 2];
+            const gray = (r + g + b) / 3;
+            binarized[i] = gray > 128 ? 1 : 0;
+        }
+
+        let minX = 255, minY = 255, maxX = 0, maxY = 0;
+        let hasInk = false;
+        for (let y = 0; y < 256; y++) {
+            for (let x = 0; x < 256; x++) {
+                if (binarized[y * 256 + x] === 1) {
+                    hasInk = true;
+                    if (x < minX) minX = x;
+                    if (y < minY) minY = y;
+                    if (x > maxX) maxX = x;
+                    if (y > maxY) maxY = y;
+                }
+            }
+        }
+
+        if (!hasInk) {
+            return { data: new Array(256).fill(0), sum: 0 };
+        }
+
+        const cropW = maxX - minX + 1;
+        const cropH = maxY - minY + 1;
+
+        const scaledW = 14, scaledH = 14;
+        const scaled = new Uint8Array(scaledW * scaledH);
+        for (let y = 0; y < scaledH; y++) {
+            for (let x = 0; x < scaledW; x++) {
+                const srcX = Math.floor((x / scaledW) * cropW);
+                const srcY = Math.floor((y / scaledH) * cropH);
+                const srcPixelX = minX + srcX;
+                const srcPixelY = minY + srcY;
+                scaled[y * scaledW + x] = binarized[srcPixelY * 256 + srcPixelX];
+            }
+        }
+
+        const offX = Math.floor((16 - scaledW) / 2);
+        const offY = Math.floor((16 - scaledH) / 2);
+        const data = new Array(256).fill(0);
+        let sum = 0;
+        for (let y = 0; y < 16; y++) {
+            for (let x = 0; x < 16; x++) {
+                if (scaled[y * scaledW + x]) {
+                    data[(offY + y) * 16 + (offX + x)] = 1.0;
+                    sum += 1.0;
+                }
+            }
+        }
+        return { data, sum };
+    }
+
+    async function predict() {
+        if (!hasDrawn) return;
+        const { data, sum } = getCanvasData();
+        if (sum < 5) return;
+
+        try {
+            const response = await fetch('/api/mlp/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pixels: data })
+            });
+            if (!response.ok) throw new Error('API error');
+            const result = await response.json();
+
+            const predEl = document.getElementById('prediction');
+            if (result.class === 0) {
+                predEl.textContent = '⭕';
+                predEl.className = 'mlp-prediction circle';
+            } else {
+                predEl.textContent = '❌';
+                predEl.className = 'mlp-prediction cross';
+            }
+            document.getElementById('confidence').textContent = 'Confiance: ' + (result.confidence * 100).toFixed(1) + '%';
+            document.getElementById('probCircle').textContent = '⭕ ' + (result.probabilities[0] * 100).toFixed(1) + '%';
+            document.getElementById('probCross').textContent = '❌ ' + (result.probabilities[1] * 100).toFixed(1) + '%';
+        } catch (err) {
+            console.error(err);
+        }
+    }
+})();
+</script>
+{{ template "footer.html" .}}
