@@ -51,6 +51,8 @@ func main() {
 	r := gin.New()
 	//Init language files
 	controllers.InitBundle()
+	//Load the pre-trained Aigo MLP model for the live demo on /projects/aigo
+	controllers.InitAigoMLP()
 	//This path is used for resources (css, img, js). The sitemap can also be placed here
 	r.Static("/resources", "./resources")
 	//Declares which functions we can use in templates
@@ -94,6 +96,10 @@ func main() {
 	r.GET("/projects", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "projects.html", controllers.Render(c, gin.H{"title": "projects"}))
 	})
+	r.GET("/projects/aigo", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "aigo.html", controllers.Render(c, gin.H{"title": "aigo"}))
+	})
+	r.POST("/api/mlp/predict", controllers.PredictAigoMLP())
 	r.GET("/contact", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "contact.html", controllers.Render(c, gin.H{"title": "contact"}))
 	})
